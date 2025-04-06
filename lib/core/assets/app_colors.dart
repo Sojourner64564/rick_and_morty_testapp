@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppColors{
-  final Color blueColor = Colors.indigo;
+  static const Color blueColor = Colors.indigo;
+  static const Color grey002 = Color.fromRGBO(0, 0, 0, 0.02);
 }

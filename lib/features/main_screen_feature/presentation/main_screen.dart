@@ -11,11 +11,11 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
             'Rick And Morty App',
-            style: AppTextstyles().w700Text25Black,
+            style: AppTextstyles.w700Text25Black,
         ),
-        backgroundColor: AppColors().blueColor,
+        backgroundColor: AppColors.blueColor,
       ),
       body: const MainPage(),
     );
