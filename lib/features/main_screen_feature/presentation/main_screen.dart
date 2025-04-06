@@ -1,0 +1,23 @@
+import 'package:flutter/material.dart';
+import 'package:rick_and_morty_testapp/core/assets/app_colors.dart';
+import 'package:rick_and_morty_testapp/core/assets/app_textstyles.dart';
+import 'package:rick_and_morty_testapp/features/main_screen_feature/presentation/main_page.dart';
+
+class MainScreen extends StatelessWidget {
+  const MainScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+            'Rick And Morty App',
+            style: AppTextstyles().w700Text25Black,
+        ),
+        backgroundColor: AppColors().blueColor,
+      ),
+      body: const MainPage(),
+    );
+  }
+}
