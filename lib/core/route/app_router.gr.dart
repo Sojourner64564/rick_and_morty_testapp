@@ -30,10 +30,13 @@ class BottomNavigationRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [FavoriteScreen]
-class FavoriteRoute extends PageRouteInfo<void> {
-  const FavoriteRoute({List<PageRouteInfo>? children})
-      : super(
+class FavoriteRoute extends PageRouteInfo<FavoriteRouteArgs> {
+  FavoriteRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           FavoriteRoute.name,
+          args: FavoriteRouteArgs(key: key),
           initialChildren: children,
         );
 
@@ -42,9 +45,22 @@ class FavoriteRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const FavoriteScreen();
+      final args = data.argsAs<FavoriteRouteArgs>(
+          orElse: () => const FavoriteRouteArgs());
+      return FavoriteScreen(key: args.key);
     },
   );
+}
+
+class FavoriteRouteArgs {
+  const FavoriteRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'FavoriteRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

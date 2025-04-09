@@ -21,8 +21,10 @@ import '../../features/common_feature/domain/repository/database_repository.dart
     as _i1060;
 import '../../features/common_feature/domain/usecase/database_favorite_uc.dart'
     as _i340;
-import '../../features/common_feature/presentation/controller/favorite_card_controller/favorite_card_cubit.dart'
-    as _i803;
+import '../../features/common_feature/presentation/controller/favorite_card_controller/favorite_card_controller.dart'
+    as _i856;
+import '../../features/favorites_screen_feature/presentation/controller/sorted_favorites_cubit/sorted_favorites_cubit.dart'
+    as _i361;
 import '../../features/main_screen_feature/data/repository_impl/fetch_characters_repository_impl.dart'
     as _i733;
 import '../../features/main_screen_feature/domain/repository/fetch_characters_repository.dart'
@@ -61,12 +63,17 @@ _i174.GetIt $initGetIt(
       () => _i340.DatabaseFavoriteUC(gh<_i1060.DatabaseFavoriteRepository>()));
   gh.lazySingleton<_i932.NetworkInfo>(
       () => _i865.NetworkInfoImpl(gh<_i973.InternetConnectionChecker>()));
-  gh.lazySingleton<_i803.FavoriteCardCubit>(
-      () => _i803.FavoriteCardCubit(gh<_i340.DatabaseFavoriteUC>()));
   gh.lazySingleton<_i475.FetchCharactersRepository>(
       () => _i733.FetchCharactersRepositoryImpl(
             gh<_i198.RetrofitRemoteClientInstance>(),
             gh<_i932.NetworkInfo>(),
+          ));
+  gh.lazySingleton<_i361.SortedFavoritesCubit>(
+      () => _i361.SortedFavoritesCubit(gh<_i340.DatabaseFavoriteUC>()));
+  gh.lazySingleton<_i856.FavoriteCardController>(
+      () => _i856.FavoriteCardController(
+            gh<_i340.DatabaseFavoriteUC>(),
+            gh<_i361.SortedFavoritesCubit>(),
           ));
   gh.lazySingleton<_i293.FetchCharactersUC>(
       () => _i293.FetchCharactersUC(gh<_i475.FetchCharactersRepository>()));

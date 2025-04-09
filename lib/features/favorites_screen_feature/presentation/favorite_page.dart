@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty_testapp/core/assets/app_textstyles.dart';
 import 'package:rick_and_morty_testapp/core/injectable/injectable.dart';
-import 'package:rick_and_morty_testapp/features/common_feature/presentation/controller/favorite_card_controller/favorite_card_cubit.dart';
 import 'package:rick_and_morty_testapp/features/common_feature/presentation/widget/character_card_widget.dart';
+import 'package:rick_and_morty_testapp/features/favorites_screen_feature/presentation/controller/sorted_favorites_cubit/sorted_favorites_cubit.dart';
 
 class FavoritePage extends StatelessWidget {
   FavoritePage({super.key});
 
-  final favoriteCardCubit = getIt<FavoriteCardCubit>();
+  final sortedFavoritesCubit = getIt<SortedFavoritesCubit>();
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FavoriteCardCubit, FavoriteCardState>(
-      bloc: favoriteCardCubit,
+    return BlocBuilder<SortedFavoritesCubit, SortedFavoritesState>(
+      bloc: sortedFavoritesCubit,
       builder: (context, state) {
-        if(state is FavoriteCardStateInitial){
+        if(state is SortedFavoritesStateInitial){
           return const Center(
             child: Text(
               'Initial',
@@ -23,7 +23,7 @@ class FavoritePage extends StatelessWidget {
             ),
           );
         }
-        if(state is FavoriteCardStateLoading){
+        if(state is SortedFavoritesStateLoading){
           return const Center(
             child: Text(
               'Loading',
@@ -31,7 +31,7 @@ class FavoritePage extends StatelessWidget {
             ),
           );
         }
-        if(state is FavoriteCardStateLoaded){
+        if(state is SortedFavoritesStateLoaded){
           return GridView.builder(
             itemCount: state.resultEntityList.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -52,7 +52,15 @@ class FavoritePage extends StatelessWidget {
             },
           );
         }
-        if(state is FavoriteCardStateError){
+        if(state is SortedFavoritesStateLoadedEmpty){
+          return const Center(
+            child: Text(
+              'Empty Result',
+              style: AppTextstyles.w700Text20Black,
+            ),
+          );
+        }
+        if(state is SortedFavoritesStateError){
           return const Center(
             child: Text(
               'Error',

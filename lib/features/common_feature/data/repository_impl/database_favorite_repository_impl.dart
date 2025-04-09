@@ -1,3 +1,4 @@
+import 'package:drift/drift.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rick_and_morty_testapp/core/database/database.dart';
 import 'package:rick_and_morty_testapp/core/error/failure.dart';
@@ -48,12 +49,9 @@ class DatabaseFavoriteRepositoryImpl implements DatabaseFavoriteRepository {
             url:element.url,
             created:element.created,
         );
-
         resultList.add(resultEntity);
       }
-
       return resultList;
-
     }catch(e){
       throw DataBaseFailure();
     }
@@ -90,6 +88,53 @@ class DatabaseFavoriteRepositoryImpl implements DatabaseFavoriteRepository {
           created: resultEntity.created,
         ),
       );
+    }catch(e){
+      throw DataBaseFailure();
+    }
+  }
+
+  @override
+  Future<List<ResultEntity>> loadNameFilteredFromDB(String text) async{
+    try{
+      final sortedResultTable = appDatabase.select(appDatabase.result)
+        ..where((row)=>row.name.lower().like("%${text.trim().toLowerCase()}%"));
+      final resultTable = await sortedResultTable.get();
+      final List<ResultEntity> resultList = [];
+      for(final element in resultTable){
+
+        final originLocationStatement = appDatabase.select(appDatabase.location)
+          ..where((row)=> row.id.isValue(element.locationId));
+        final originTable =  await originLocationStatement.get();
+        final originLocationEntity = LocationEntity(
+          name: originTable.first.name,
+          url: originTable.first.url,
+        );
+
+        final locationStatement =  appDatabase.select(appDatabase.location)
+          ..where((row)=> row.id.isValue(element.locationId));
+        final locationTable =  await locationStatement.get();
+        final locationEntity = LocationEntity(
+          name: locationTable.first.name,
+          url: locationTable.first.url,
+        );
+
+        final ResultEntity resultEntity = ResultEntity(
+          id: element.characterId,
+          name: element.name,
+          status:element.status,
+          species:element.species,
+          type:element.type,
+          gender:element.gender,
+          origin:originLocationEntity,
+          location:locationEntity,
+          image:element.image,
+          episode:element.episodes,
+          url:element.url,
+          created:element.created,
+        );
+        resultList.add(resultEntity);
+      }
+      return resultList;
     }catch(e){
       throw DataBaseFailure();
     }

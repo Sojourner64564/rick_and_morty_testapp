@@ -19,4 +19,15 @@ class DatabaseFavoriteUC implements DatabaseFavoriteRepository{
     return await _databaseFavoriteRepository.saveToDB(resultEntity);
   }
 
+  @override
+  Future<List<ResultEntity>> loadNameFilteredFromDB(String text) async{
+    if(text.isEmpty){
+      return await _databaseFavoriteRepository.loadFromDB();
+    }
+    // Дебаунсер на запросы к базе данных
+    await Future.delayed(const Duration(milliseconds: 300));
+    return await _databaseFavoriteRepository.loadNameFilteredFromDB(text);
+
+  }
+
 }

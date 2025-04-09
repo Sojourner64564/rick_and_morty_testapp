@@ -11,8 +11,8 @@ class BottomNavigationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
       extendBody: true,
-      routes: const [
-        MainRoute(),
+      routes: [
+        const MainRoute(),
         FavoriteRoute(),
       ],
       animationDuration: const Duration(milliseconds: 150),

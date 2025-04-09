@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty_testapp/core/assets/app_textstyles.dart';
 import 'package:rick_and_morty_testapp/core/injectable/injectable.dart';
-import 'package:rick_and_morty_testapp/features/common_feature/presentation/controller/favorite_card_controller/favorite_card_cubit.dart';
+import 'package:rick_and_morty_testapp/features/common_feature/presentation/controller/favorite_card_controller/favorite_card_controller.dart';
 import 'package:rick_and_morty_testapp/features/common_feature/presentation/widget/character_card_widget.dart';
+import 'package:rick_and_morty_testapp/features/favorites_screen_feature/presentation/controller/sorted_favorites_cubit/sorted_favorites_cubit.dart';
 import 'package:rick_and_morty_testapp/features/main_screen_feature/presentation/controller/fetch_characters_cubit/fetch_characters_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainPage extends StatefulWidget {
    MainPage({super.key});
   final fetchCharactersCubit = getIt<FetchCharactersCubit>();
-  final favoriteCardCubit = getIt<FavoriteCardCubit>();
+   final sortedFavoritesCubit = getIt<SortedFavoritesCubit>();
+   final favoriteCardController = getIt<FavoriteCardController>();
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -21,7 +23,7 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     widget.fetchCharactersCubit.fetchCharacters();
-    widget.favoriteCardCubit.loadFavoriteCard();
+    widget.sortedFavoritesCubit.loadCharactersWithoutFilter();
     super.initState();
   }
 
@@ -57,7 +59,7 @@ class _MainPageState extends State<MainPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: CharacterCardWidget(
                   onTap: () {
-                    widget.favoriteCardCubit.saveFavoriteCard(state.characterEntity.results[index]);
+                    widget.favoriteCardController.saveFavoriteCard(state.characterEntity.results[index]);
                   },
                   resultEntity: state.characterEntity.results[index],
                   isFavorite: true,
