@@ -46,7 +46,7 @@ class FavoriteScreen extends StatelessWidget {
           backgroundColor: AppColors.blueColor,
         ),
       ),
-      body: const FavoritePage(),
+      body: FavoritePage(),
     );
   }
 }

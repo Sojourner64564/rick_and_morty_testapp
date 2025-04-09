@@ -60,7 +60,7 @@ class DatabaseFavoriteRepositoryImpl implements DatabaseFavoriteRepository {
   }
 
   @override
-  Future<bool> saveToDB(ResultEntity resultEntity) async {
+  Future<void> saveToDB(ResultEntity resultEntity) async {
     try {
       final originId = await appDatabase.into(appDatabase.location).insert(
         LocationCompanion.insert(
@@ -90,7 +90,6 @@ class DatabaseFavoriteRepositoryImpl implements DatabaseFavoriteRepository {
           created: resultEntity.created,
         ),
       );
-      return true; //Успешно сохранено
     }catch(e){
       throw DataBaseFailure();
     }
