@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty_testapp/core/injectable/injectable.dart';
-import 'package:rick_and_morty_testapp/features/main_screen_feature/presentation/main_screen.dart';
+import 'package:rick_and_morty_testapp/core/route/app_router.dart';
 
 void main() {
   configureDependencies();
@@ -12,8 +12,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MainScreen(),
+    return MaterialApp.router(
+      routeInformationParser: getIt<AppRouter>().defaultRouteParser(),
+      routerDelegate: getIt<AppRouter>().delegate(),
     );
   }
 }

@@ -39,7 +39,10 @@ dependencies:
   retrofit: ^4.4.2
   dio: ^5.7.0
   auto_route: ^9.3.0+1
-
+  drift: ^2.20.0
+  sqlite3_flutter_libs: ^0.5.0
+  path_provider: ^2.1.1
+  path: ^1.8.3
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
@@ -52,6 +55,7 @@ dev_dependencies:
   json_serializable: ^6.6.2
   auto_route_generator: ^9.0.0
   retrofit_generator: ^8.0.0
+  drift_dev: ^2.20.0
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

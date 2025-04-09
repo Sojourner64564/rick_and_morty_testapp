@@ -27,7 +27,7 @@ class CharacterCardWidget extends StatelessWidget {
                     width: double.infinity,
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
-                        child: Image.network(
+                        child: Image.network( //TODO сделать в случае ошибки
                             resultEntity.image,
                             fit: BoxFit.cover,
                             loadingBuilder: (buildContext, widget, imageChunkEvent){
