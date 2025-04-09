@@ -1,0 +1,2590 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'database.dart';
+
+// ignore_for_file: type=lint
+class $InfoTable extends Info with TableInfo<$InfoTable, InfoTable> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $InfoTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _countMeta = const VerificationMeta('count');
+  @override
+  late final GeneratedColumn<int> count = GeneratedColumn<int>(
+      'count', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _pagesMeta = const VerificationMeta('pages');
+  @override
+  late final GeneratedColumn<int> pages = GeneratedColumn<int>(
+      'pages', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _nextMeta = const VerificationMeta('next');
+  @override
+  late final GeneratedColumn<String> next = GeneratedColumn<String>(
+      'next', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _prevMeta = const VerificationMeta('prev');
+  @override
+  late final GeneratedColumn<String> prev = GeneratedColumn<String>(
+      'prev', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [id, count, pages, next, prev];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'info';
+  @override
+  VerificationContext validateIntegrity(Insertable<InfoTable> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('count')) {
+      context.handle(
+          _countMeta, count.isAcceptableOrUnknown(data['count']!, _countMeta));
+    } else if (isInserting) {
+      context.missing(_countMeta);
+    }
+    if (data.containsKey('pages')) {
+      context.handle(
+          _pagesMeta, pages.isAcceptableOrUnknown(data['pages']!, _pagesMeta));
+    } else if (isInserting) {
+      context.missing(_pagesMeta);
+    }
+    if (data.containsKey('next')) {
+      context.handle(
+          _nextMeta, next.isAcceptableOrUnknown(data['next']!, _nextMeta));
+    } else if (isInserting) {
+      context.missing(_nextMeta);
+    }
+    if (data.containsKey('prev')) {
+      context.handle(
+          _prevMeta, prev.isAcceptableOrUnknown(data['prev']!, _prevMeta));
+    } else if (isInserting) {
+      context.missing(_prevMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  InfoTable map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return InfoTable(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      count: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}count'])!,
+      pages: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}pages'])!,
+      next: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}next'])!,
+      prev: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}prev'])!,
+    );
+  }
+
+  @override
+  $InfoTable createAlias(String alias) {
+    return $InfoTable(attachedDatabase, alias);
+  }
+}
+
+class InfoTable extends DataClass implements Insertable<InfoTable> {
+  final int id;
+  final int count;
+  final int pages;
+  final String next;
+  final String prev;
+  const InfoTable(
+      {required this.id,
+      required this.count,
+      required this.pages,
+      required this.next,
+      required this.prev});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['count'] = Variable<int>(count);
+    map['pages'] = Variable<int>(pages);
+    map['next'] = Variable<String>(next);
+    map['prev'] = Variable<String>(prev);
+    return map;
+  }
+
+  InfoCompanion toCompanion(bool nullToAbsent) {
+    return InfoCompanion(
+      id: Value(id),
+      count: Value(count),
+      pages: Value(pages),
+      next: Value(next),
+      prev: Value(prev),
+    );
+  }
+
+  factory InfoTable.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return InfoTable(
+      id: serializer.fromJson<int>(json['id']),
+      count: serializer.fromJson<int>(json['count']),
+      pages: serializer.fromJson<int>(json['pages']),
+      next: serializer.fromJson<String>(json['next']),
+      prev: serializer.fromJson<String>(json['prev']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'count': serializer.toJson<int>(count),
+      'pages': serializer.toJson<int>(pages),
+      'next': serializer.toJson<String>(next),
+      'prev': serializer.toJson<String>(prev),
+    };
+  }
+
+  InfoTable copyWith(
+          {int? id, int? count, int? pages, String? next, String? prev}) =>
+      InfoTable(
+        id: id ?? this.id,
+        count: count ?? this.count,
+        pages: pages ?? this.pages,
+        next: next ?? this.next,
+        prev: prev ?? this.prev,
+      );
+  InfoTable copyWithCompanion(InfoCompanion data) {
+    return InfoTable(
+      id: data.id.present ? data.id.value : this.id,
+      count: data.count.present ? data.count.value : this.count,
+      pages: data.pages.present ? data.pages.value : this.pages,
+      next: data.next.present ? data.next.value : this.next,
+      prev: data.prev.present ? data.prev.value : this.prev,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('InfoTable(')
+          ..write('id: $id, ')
+          ..write('count: $count, ')
+          ..write('pages: $pages, ')
+          ..write('next: $next, ')
+          ..write('prev: $prev')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, count, pages, next, prev);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is InfoTable &&
+          other.id == this.id &&
+          other.count == this.count &&
+          other.pages == this.pages &&
+          other.next == this.next &&
+          other.prev == this.prev);
+}
+
+class InfoCompanion extends UpdateCompanion<InfoTable> {
+  final Value<int> id;
+  final Value<int> count;
+  final Value<int> pages;
+  final Value<String> next;
+  final Value<String> prev;
+  const InfoCompanion({
+    this.id = const Value.absent(),
+    this.count = const Value.absent(),
+    this.pages = const Value.absent(),
+    this.next = const Value.absent(),
+    this.prev = const Value.absent(),
+  });
+  InfoCompanion.insert({
+    this.id = const Value.absent(),
+    required int count,
+    required int pages,
+    required String next,
+    required String prev,
+  })  : count = Value(count),
+        pages = Value(pages),
+        next = Value(next),
+        prev = Value(prev);
+  static Insertable<InfoTable> custom({
+    Expression<int>? id,
+    Expression<int>? count,
+    Expression<int>? pages,
+    Expression<String>? next,
+    Expression<String>? prev,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (count != null) 'count': count,
+      if (pages != null) 'pages': pages,
+      if (next != null) 'next': next,
+      if (prev != null) 'prev': prev,
+    });
+  }
+
+  InfoCompanion copyWith(
+      {Value<int>? id,
+      Value<int>? count,
+      Value<int>? pages,
+      Value<String>? next,
+      Value<String>? prev}) {
+    return InfoCompanion(
+      id: id ?? this.id,
+      count: count ?? this.count,
+      pages: pages ?? this.pages,
+      next: next ?? this.next,
+      prev: prev ?? this.prev,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (count.present) {
+      map['count'] = Variable<int>(count.value);
+    }
+    if (pages.present) {
+      map['pages'] = Variable<int>(pages.value);
+    }
+    if (next.present) {
+      map['next'] = Variable<String>(next.value);
+    }
+    if (prev.present) {
+      map['prev'] = Variable<String>(prev.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('InfoCompanion(')
+          ..write('id: $id, ')
+          ..write('count: $count, ')
+          ..write('pages: $pages, ')
+          ..write('next: $next, ')
+          ..write('prev: $prev')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LocationTable extends Location
+    with TableInfo<$LocationTable, LocationTable> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $LocationTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _urlMeta = const VerificationMeta('url');
+  @override
+  late final GeneratedColumn<String> url = GeneratedColumn<String>(
+      'url', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [id, name, url];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'location';
+  @override
+  VerificationContext validateIntegrity(Insertable<LocationTable> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('url')) {
+      context.handle(
+          _urlMeta, url.isAcceptableOrUnknown(data['url']!, _urlMeta));
+    } else if (isInserting) {
+      context.missing(_urlMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  LocationTable map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return LocationTable(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      url: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}url'])!,
+    );
+  }
+
+  @override
+  $LocationTable createAlias(String alias) {
+    return $LocationTable(attachedDatabase, alias);
+  }
+}
+
+class LocationTable extends DataClass implements Insertable<LocationTable> {
+  final int id;
+  final String name;
+  final String url;
+  const LocationTable(
+      {required this.id, required this.name, required this.url});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
+    map['url'] = Variable<String>(url);
+    return map;
+  }
+
+  LocationCompanion toCompanion(bool nullToAbsent) {
+    return LocationCompanion(
+      id: Value(id),
+      name: Value(name),
+      url: Value(url),
+    );
+  }
+
+  factory LocationTable.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return LocationTable(
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+      url: serializer.fromJson<String>(json['url']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
+      'url': serializer.toJson<String>(url),
+    };
+  }
+
+  LocationTable copyWith({int? id, String? name, String? url}) => LocationTable(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        url: url ?? this.url,
+      );
+  LocationTable copyWithCompanion(LocationCompanion data) {
+    return LocationTable(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+      url: data.url.present ? data.url.value : this.url,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocationTable(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('url: $url')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, name, url);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is LocationTable &&
+          other.id == this.id &&
+          other.name == this.name &&
+          other.url == this.url);
+}
+
+class LocationCompanion extends UpdateCompanion<LocationTable> {
+  final Value<int> id;
+  final Value<String> name;
+  final Value<String> url;
+  const LocationCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.url = const Value.absent(),
+  });
+  LocationCompanion.insert({
+    this.id = const Value.absent(),
+    required String name,
+    required String url,
+  })  : name = Value(name),
+        url = Value(url);
+  static Insertable<LocationTable> custom({
+    Expression<int>? id,
+    Expression<String>? name,
+    Expression<String>? url,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (url != null) 'url': url,
+    });
+  }
+
+  LocationCompanion copyWith(
+      {Value<int>? id, Value<String>? name, Value<String>? url}) {
+    return LocationCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      url: url ?? this.url,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (url.present) {
+      map['url'] = Variable<String>(url.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LocationCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('url: $url')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $ResultTable extends Result with TableInfo<$ResultTable, ResultTable> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ResultTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _characterIdMeta =
+      const VerificationMeta('characterId');
+  @override
+  late final GeneratedColumn<int> characterId = GeneratedColumn<int>(
+      'character_id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _statusMeta = const VerificationMeta('status');
+  @override
+  late final GeneratedColumn<String> status = GeneratedColumn<String>(
+      'status', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _speciesMeta =
+      const VerificationMeta('species');
+  @override
+  late final GeneratedColumn<String> species = GeneratedColumn<String>(
+      'species', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _typeMeta = const VerificationMeta('type');
+  @override
+  late final GeneratedColumn<String> type = GeneratedColumn<String>(
+      'type', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _genderMeta = const VerificationMeta('gender');
+  @override
+  late final GeneratedColumn<String> gender = GeneratedColumn<String>(
+      'gender', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _originIdMeta =
+      const VerificationMeta('originId');
+  @override
+  late final GeneratedColumn<int> originId = GeneratedColumn<int>(
+      'origin_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES location (id)'));
+  static const VerificationMeta _locationIdMeta =
+      const VerificationMeta('locationId');
+  @override
+  late final GeneratedColumn<int> locationId = GeneratedColumn<int>(
+      'location_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES location (id)'));
+  static const VerificationMeta _imageMeta = const VerificationMeta('image');
+  @override
+  late final GeneratedColumn<String> image = GeneratedColumn<String>(
+      'image', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _episodesMeta =
+      const VerificationMeta('episodes');
+  @override
+  late final GeneratedColumnWithTypeConverter<List<String>, String> episodes =
+      GeneratedColumn<String>('episodes', aliasedName, false,
+              type: DriftSqlType.string, requiredDuringInsert: true)
+          .withConverter<List<String>>($ResultTable.$converterepisodes);
+  static const VerificationMeta _urlMeta = const VerificationMeta('url');
+  @override
+  late final GeneratedColumn<String> url = GeneratedColumn<String>(
+      'url', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _createdMeta =
+      const VerificationMeta('created');
+  @override
+  late final GeneratedColumn<String> created = GeneratedColumn<String>(
+      'created', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        characterId,
+        name,
+        status,
+        species,
+        type,
+        gender,
+        originId,
+        locationId,
+        image,
+        episodes,
+        url,
+        created
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'result';
+  @override
+  VerificationContext validateIntegrity(Insertable<ResultTable> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('character_id')) {
+      context.handle(
+          _characterIdMeta,
+          characterId.isAcceptableOrUnknown(
+              data['character_id']!, _characterIdMeta));
+    } else if (isInserting) {
+      context.missing(_characterIdMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('status')) {
+      context.handle(_statusMeta,
+          status.isAcceptableOrUnknown(data['status']!, _statusMeta));
+    } else if (isInserting) {
+      context.missing(_statusMeta);
+    }
+    if (data.containsKey('species')) {
+      context.handle(_speciesMeta,
+          species.isAcceptableOrUnknown(data['species']!, _speciesMeta));
+    } else if (isInserting) {
+      context.missing(_speciesMeta);
+    }
+    if (data.containsKey('type')) {
+      context.handle(
+          _typeMeta, type.isAcceptableOrUnknown(data['type']!, _typeMeta));
+    } else if (isInserting) {
+      context.missing(_typeMeta);
+    }
+    if (data.containsKey('gender')) {
+      context.handle(_genderMeta,
+          gender.isAcceptableOrUnknown(data['gender']!, _genderMeta));
+    } else if (isInserting) {
+      context.missing(_genderMeta);
+    }
+    if (data.containsKey('origin_id')) {
+      context.handle(_originIdMeta,
+          originId.isAcceptableOrUnknown(data['origin_id']!, _originIdMeta));
+    } else if (isInserting) {
+      context.missing(_originIdMeta);
+    }
+    if (data.containsKey('location_id')) {
+      context.handle(
+          _locationIdMeta,
+          locationId.isAcceptableOrUnknown(
+              data['location_id']!, _locationIdMeta));
+    } else if (isInserting) {
+      context.missing(_locationIdMeta);
+    }
+    if (data.containsKey('image')) {
+      context.handle(
+          _imageMeta, image.isAcceptableOrUnknown(data['image']!, _imageMeta));
+    } else if (isInserting) {
+      context.missing(_imageMeta);
+    }
+    context.handle(_episodesMeta, const VerificationResult.success());
+    if (data.containsKey('url')) {
+      context.handle(
+          _urlMeta, url.isAcceptableOrUnknown(data['url']!, _urlMeta));
+    } else if (isInserting) {
+      context.missing(_urlMeta);
+    }
+    if (data.containsKey('created')) {
+      context.handle(_createdMeta,
+          created.isAcceptableOrUnknown(data['created']!, _createdMeta));
+    } else if (isInserting) {
+      context.missing(_createdMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  ResultTable map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ResultTable(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      characterId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}character_id'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      status: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}status'])!,
+      species: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}species'])!,
+      type: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}type'])!,
+      gender: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}gender'])!,
+      originId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}origin_id'])!,
+      locationId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}location_id'])!,
+      image: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}image'])!,
+      episodes: $ResultTable.$converterepisodes.fromSql(attachedDatabase
+          .typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}episodes'])!),
+      url: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}url'])!,
+      created: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}created'])!,
+    );
+  }
+
+  @override
+  $ResultTable createAlias(String alias) {
+    return $ResultTable(attachedDatabase, alias);
+  }
+
+  static TypeConverter<List<String>, String> $converterepisodes =
+      const StringListConverter();
+}
+
+class ResultTable extends DataClass implements Insertable<ResultTable> {
+  final int id;
+  final int characterId;
+  final String name;
+  final String status;
+  final String species;
+  final String type;
+  final String gender;
+  final int originId;
+  final int locationId;
+  final String image;
+  final List<String> episodes;
+  final String url;
+  final String created;
+  const ResultTable(
+      {required this.id,
+      required this.characterId,
+      required this.name,
+      required this.status,
+      required this.species,
+      required this.type,
+      required this.gender,
+      required this.originId,
+      required this.locationId,
+      required this.image,
+      required this.episodes,
+      required this.url,
+      required this.created});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['character_id'] = Variable<int>(characterId);
+    map['name'] = Variable<String>(name);
+    map['status'] = Variable<String>(status);
+    map['species'] = Variable<String>(species);
+    map['type'] = Variable<String>(type);
+    map['gender'] = Variable<String>(gender);
+    map['origin_id'] = Variable<int>(originId);
+    map['location_id'] = Variable<int>(locationId);
+    map['image'] = Variable<String>(image);
+    {
+      map['episodes'] =
+          Variable<String>($ResultTable.$converterepisodes.toSql(episodes));
+    }
+    map['url'] = Variable<String>(url);
+    map['created'] = Variable<String>(created);
+    return map;
+  }
+
+  ResultCompanion toCompanion(bool nullToAbsent) {
+    return ResultCompanion(
+      id: Value(id),
+      characterId: Value(characterId),
+      name: Value(name),
+      status: Value(status),
+      species: Value(species),
+      type: Value(type),
+      gender: Value(gender),
+      originId: Value(originId),
+      locationId: Value(locationId),
+      image: Value(image),
+      episodes: Value(episodes),
+      url: Value(url),
+      created: Value(created),
+    );
+  }
+
+  factory ResultTable.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ResultTable(
+      id: serializer.fromJson<int>(json['id']),
+      characterId: serializer.fromJson<int>(json['characterId']),
+      name: serializer.fromJson<String>(json['name']),
+      status: serializer.fromJson<String>(json['status']),
+      species: serializer.fromJson<String>(json['species']),
+      type: serializer.fromJson<String>(json['type']),
+      gender: serializer.fromJson<String>(json['gender']),
+      originId: serializer.fromJson<int>(json['originId']),
+      locationId: serializer.fromJson<int>(json['locationId']),
+      image: serializer.fromJson<String>(json['image']),
+      episodes: serializer.fromJson<List<String>>(json['episodes']),
+      url: serializer.fromJson<String>(json['url']),
+      created: serializer.fromJson<String>(json['created']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'characterId': serializer.toJson<int>(characterId),
+      'name': serializer.toJson<String>(name),
+      'status': serializer.toJson<String>(status),
+      'species': serializer.toJson<String>(species),
+      'type': serializer.toJson<String>(type),
+      'gender': serializer.toJson<String>(gender),
+      'originId': serializer.toJson<int>(originId),
+      'locationId': serializer.toJson<int>(locationId),
+      'image': serializer.toJson<String>(image),
+      'episodes': serializer.toJson<List<String>>(episodes),
+      'url': serializer.toJson<String>(url),
+      'created': serializer.toJson<String>(created),
+    };
+  }
+
+  ResultTable copyWith(
+          {int? id,
+          int? characterId,
+          String? name,
+          String? status,
+          String? species,
+          String? type,
+          String? gender,
+          int? originId,
+          int? locationId,
+          String? image,
+          List<String>? episodes,
+          String? url,
+          String? created}) =>
+      ResultTable(
+        id: id ?? this.id,
+        characterId: characterId ?? this.characterId,
+        name: name ?? this.name,
+        status: status ?? this.status,
+        species: species ?? this.species,
+        type: type ?? this.type,
+        gender: gender ?? this.gender,
+        originId: originId ?? this.originId,
+        locationId: locationId ?? this.locationId,
+        image: image ?? this.image,
+        episodes: episodes ?? this.episodes,
+        url: url ?? this.url,
+        created: created ?? this.created,
+      );
+  ResultTable copyWithCompanion(ResultCompanion data) {
+    return ResultTable(
+      id: data.id.present ? data.id.value : this.id,
+      characterId:
+          data.characterId.present ? data.characterId.value : this.characterId,
+      name: data.name.present ? data.name.value : this.name,
+      status: data.status.present ? data.status.value : this.status,
+      species: data.species.present ? data.species.value : this.species,
+      type: data.type.present ? data.type.value : this.type,
+      gender: data.gender.present ? data.gender.value : this.gender,
+      originId: data.originId.present ? data.originId.value : this.originId,
+      locationId:
+          data.locationId.present ? data.locationId.value : this.locationId,
+      image: data.image.present ? data.image.value : this.image,
+      episodes: data.episodes.present ? data.episodes.value : this.episodes,
+      url: data.url.present ? data.url.value : this.url,
+      created: data.created.present ? data.created.value : this.created,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ResultTable(')
+          ..write('id: $id, ')
+          ..write('characterId: $characterId, ')
+          ..write('name: $name, ')
+          ..write('status: $status, ')
+          ..write('species: $species, ')
+          ..write('type: $type, ')
+          ..write('gender: $gender, ')
+          ..write('originId: $originId, ')
+          ..write('locationId: $locationId, ')
+          ..write('image: $image, ')
+          ..write('episodes: $episodes, ')
+          ..write('url: $url, ')
+          ..write('created: $created')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, characterId, name, status, species, type,
+      gender, originId, locationId, image, episodes, url, created);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ResultTable &&
+          other.id == this.id &&
+          other.characterId == this.characterId &&
+          other.name == this.name &&
+          other.status == this.status &&
+          other.species == this.species &&
+          other.type == this.type &&
+          other.gender == this.gender &&
+          other.originId == this.originId &&
+          other.locationId == this.locationId &&
+          other.image == this.image &&
+          other.episodes == this.episodes &&
+          other.url == this.url &&
+          other.created == this.created);
+}
+
+class ResultCompanion extends UpdateCompanion<ResultTable> {
+  final Value<int> id;
+  final Value<int> characterId;
+  final Value<String> name;
+  final Value<String> status;
+  final Value<String> species;
+  final Value<String> type;
+  final Value<String> gender;
+  final Value<int> originId;
+  final Value<int> locationId;
+  final Value<String> image;
+  final Value<List<String>> episodes;
+  final Value<String> url;
+  final Value<String> created;
+  const ResultCompanion({
+    this.id = const Value.absent(),
+    this.characterId = const Value.absent(),
+    this.name = const Value.absent(),
+    this.status = const Value.absent(),
+    this.species = const Value.absent(),
+    this.type = const Value.absent(),
+    this.gender = const Value.absent(),
+    this.originId = const Value.absent(),
+    this.locationId = const Value.absent(),
+    this.image = const Value.absent(),
+    this.episodes = const Value.absent(),
+    this.url = const Value.absent(),
+    this.created = const Value.absent(),
+  });
+  ResultCompanion.insert({
+    this.id = const Value.absent(),
+    required int characterId,
+    required String name,
+    required String status,
+    required String species,
+    required String type,
+    required String gender,
+    required int originId,
+    required int locationId,
+    required String image,
+    required List<String> episodes,
+    required String url,
+    required String created,
+  })  : characterId = Value(characterId),
+        name = Value(name),
+        status = Value(status),
+        species = Value(species),
+        type = Value(type),
+        gender = Value(gender),
+        originId = Value(originId),
+        locationId = Value(locationId),
+        image = Value(image),
+        episodes = Value(episodes),
+        url = Value(url),
+        created = Value(created);
+  static Insertable<ResultTable> custom({
+    Expression<int>? id,
+    Expression<int>? characterId,
+    Expression<String>? name,
+    Expression<String>? status,
+    Expression<String>? species,
+    Expression<String>? type,
+    Expression<String>? gender,
+    Expression<int>? originId,
+    Expression<int>? locationId,
+    Expression<String>? image,
+    Expression<String>? episodes,
+    Expression<String>? url,
+    Expression<String>? created,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (characterId != null) 'character_id': characterId,
+      if (name != null) 'name': name,
+      if (status != null) 'status': status,
+      if (species != null) 'species': species,
+      if (type != null) 'type': type,
+      if (gender != null) 'gender': gender,
+      if (originId != null) 'origin_id': originId,
+      if (locationId != null) 'location_id': locationId,
+      if (image != null) 'image': image,
+      if (episodes != null) 'episodes': episodes,
+      if (url != null) 'url': url,
+      if (created != null) 'created': created,
+    });
+  }
+
+  ResultCompanion copyWith(
+      {Value<int>? id,
+      Value<int>? characterId,
+      Value<String>? name,
+      Value<String>? status,
+      Value<String>? species,
+      Value<String>? type,
+      Value<String>? gender,
+      Value<int>? originId,
+      Value<int>? locationId,
+      Value<String>? image,
+      Value<List<String>>? episodes,
+      Value<String>? url,
+      Value<String>? created}) {
+    return ResultCompanion(
+      id: id ?? this.id,
+      characterId: characterId ?? this.characterId,
+      name: name ?? this.name,
+      status: status ?? this.status,
+      species: species ?? this.species,
+      type: type ?? this.type,
+      gender: gender ?? this.gender,
+      originId: originId ?? this.originId,
+      locationId: locationId ?? this.locationId,
+      image: image ?? this.image,
+      episodes: episodes ?? this.episodes,
+      url: url ?? this.url,
+      created: created ?? this.created,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (characterId.present) {
+      map['character_id'] = Variable<int>(characterId.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (status.present) {
+      map['status'] = Variable<String>(status.value);
+    }
+    if (species.present) {
+      map['species'] = Variable<String>(species.value);
+    }
+    if (type.present) {
+      map['type'] = Variable<String>(type.value);
+    }
+    if (gender.present) {
+      map['gender'] = Variable<String>(gender.value);
+    }
+    if (originId.present) {
+      map['origin_id'] = Variable<int>(originId.value);
+    }
+    if (locationId.present) {
+      map['location_id'] = Variable<int>(locationId.value);
+    }
+    if (image.present) {
+      map['image'] = Variable<String>(image.value);
+    }
+    if (episodes.present) {
+      map['episodes'] = Variable<String>(
+          $ResultTable.$converterepisodes.toSql(episodes.value));
+    }
+    if (url.present) {
+      map['url'] = Variable<String>(url.value);
+    }
+    if (created.present) {
+      map['created'] = Variable<String>(created.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ResultCompanion(')
+          ..write('id: $id, ')
+          ..write('characterId: $characterId, ')
+          ..write('name: $name, ')
+          ..write('status: $status, ')
+          ..write('species: $species, ')
+          ..write('type: $type, ')
+          ..write('gender: $gender, ')
+          ..write('originId: $originId, ')
+          ..write('locationId: $locationId, ')
+          ..write('image: $image, ')
+          ..write('episodes: $episodes, ')
+          ..write('url: $url, ')
+          ..write('created: $created')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $CharacterTable extends Character
+    with TableInfo<$CharacterTable, EpisodeTable> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $CharacterTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _infoIdMeta = const VerificationMeta('infoId');
+  @override
+  late final GeneratedColumn<int> infoId = GeneratedColumn<int>(
+      'info_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES info (id)'));
+  static const VerificationMeta _characterIdMeta =
+      const VerificationMeta('characterId');
+  @override
+  late final GeneratedColumn<int> characterId = GeneratedColumn<int>(
+      'character_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES result (id)'));
+  @override
+  List<GeneratedColumn> get $columns => [id, infoId, characterId];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'character';
+  @override
+  VerificationContext validateIntegrity(Insertable<EpisodeTable> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('info_id')) {
+      context.handle(_infoIdMeta,
+          infoId.isAcceptableOrUnknown(data['info_id']!, _infoIdMeta));
+    } else if (isInserting) {
+      context.missing(_infoIdMeta);
+    }
+    if (data.containsKey('character_id')) {
+      context.handle(
+          _characterIdMeta,
+          characterId.isAcceptableOrUnknown(
+              data['character_id']!, _characterIdMeta));
+    } else if (isInserting) {
+      context.missing(_characterIdMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  EpisodeTable map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return EpisodeTable(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      infoId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}info_id'])!,
+      characterId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}character_id'])!,
+    );
+  }
+
+  @override
+  $CharacterTable createAlias(String alias) {
+    return $CharacterTable(attachedDatabase, alias);
+  }
+}
+
+class EpisodeTable extends DataClass implements Insertable<EpisodeTable> {
+  final int id;
+  final int infoId;
+  final int characterId;
+  const EpisodeTable(
+      {required this.id, required this.infoId, required this.characterId});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['info_id'] = Variable<int>(infoId);
+    map['character_id'] = Variable<int>(characterId);
+    return map;
+  }
+
+  CharacterCompanion toCompanion(bool nullToAbsent) {
+    return CharacterCompanion(
+      id: Value(id),
+      infoId: Value(infoId),
+      characterId: Value(characterId),
+    );
+  }
+
+  factory EpisodeTable.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return EpisodeTable(
+      id: serializer.fromJson<int>(json['id']),
+      infoId: serializer.fromJson<int>(json['infoId']),
+      characterId: serializer.fromJson<int>(json['characterId']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'infoId': serializer.toJson<int>(infoId),
+      'characterId': serializer.toJson<int>(characterId),
+    };
+  }
+
+  EpisodeTable copyWith({int? id, int? infoId, int? characterId}) =>
+      EpisodeTable(
+        id: id ?? this.id,
+        infoId: infoId ?? this.infoId,
+        characterId: characterId ?? this.characterId,
+      );
+  EpisodeTable copyWithCompanion(CharacterCompanion data) {
+    return EpisodeTable(
+      id: data.id.present ? data.id.value : this.id,
+      infoId: data.infoId.present ? data.infoId.value : this.infoId,
+      characterId:
+          data.characterId.present ? data.characterId.value : this.characterId,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('EpisodeTable(')
+          ..write('id: $id, ')
+          ..write('infoId: $infoId, ')
+          ..write('characterId: $characterId')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, infoId, characterId);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is EpisodeTable &&
+          other.id == this.id &&
+          other.infoId == this.infoId &&
+          other.characterId == this.characterId);
+}
+
+class CharacterCompanion extends UpdateCompanion<EpisodeTable> {
+  final Value<int> id;
+  final Value<int> infoId;
+  final Value<int> characterId;
+  const CharacterCompanion({
+    this.id = const Value.absent(),
+    this.infoId = const Value.absent(),
+    this.characterId = const Value.absent(),
+  });
+  CharacterCompanion.insert({
+    this.id = const Value.absent(),
+    required int infoId,
+    required int characterId,
+  })  : infoId = Value(infoId),
+        characterId = Value(characterId);
+  static Insertable<EpisodeTable> custom({
+    Expression<int>? id,
+    Expression<int>? infoId,
+    Expression<int>? characterId,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (infoId != null) 'info_id': infoId,
+      if (characterId != null) 'character_id': characterId,
+    });
+  }
+
+  CharacterCompanion copyWith(
+      {Value<int>? id, Value<int>? infoId, Value<int>? characterId}) {
+    return CharacterCompanion(
+      id: id ?? this.id,
+      infoId: infoId ?? this.infoId,
+      characterId: characterId ?? this.characterId,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (infoId.present) {
+      map['info_id'] = Variable<int>(infoId.value);
+    }
+    if (characterId.present) {
+      map['character_id'] = Variable<int>(characterId.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CharacterCompanion(')
+          ..write('id: $id, ')
+          ..write('infoId: $infoId, ')
+          ..write('characterId: $characterId')
+          ..write(')'))
+        .toString();
+  }
+}
+
+abstract class _$AppDatabase extends GeneratedDatabase {
+  _$AppDatabase(QueryExecutor e) : super(e);
+  $AppDatabaseManager get managers => $AppDatabaseManager(this);
+  late final $InfoTable info = $InfoTable(this);
+  late final $LocationTable location = $LocationTable(this);
+  late final $ResultTable result = $ResultTable(this);
+  late final $CharacterTable character = $CharacterTable(this);
+  @override
+  Iterable<TableInfo<Table, Object?>> get allTables =>
+      allSchemaEntities.whereType<TableInfo<Table, Object?>>();
+  @override
+  List<DatabaseSchemaEntity> get allSchemaEntities =>
+      [info, location, result, character];
+}
+
+typedef $$InfoTableCreateCompanionBuilder = InfoCompanion Function({
+  Value<int> id,
+  required int count,
+  required int pages,
+  required String next,
+  required String prev,
+});
+typedef $$InfoTableUpdateCompanionBuilder = InfoCompanion Function({
+  Value<int> id,
+  Value<int> count,
+  Value<int> pages,
+  Value<String> next,
+  Value<String> prev,
+});
+
+final class $$InfoTableReferences
+    extends BaseReferences<_$AppDatabase, $InfoTable, InfoTable> {
+  $$InfoTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$CharacterTable, List<EpisodeTable>>
+      _characterRefsTable(_$AppDatabase db) =>
+          MultiTypedResultKey.fromTable(db.character,
+              aliasName: $_aliasNameGenerator(db.info.id, db.character.infoId));
+
+  $$CharacterTableProcessedTableManager get characterRefs {
+    final manager = $$CharacterTableTableManager($_db, $_db.character)
+        .filter((f) => f.infoId.id($_item.id));
+
+    final cache = $_typedResult.readTableOrNull(_characterRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+}
+
+class $$InfoTableFilterComposer extends Composer<_$AppDatabase, $InfoTable> {
+  $$InfoTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get count => $composableBuilder(
+      column: $table.count, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get pages => $composableBuilder(
+      column: $table.pages, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get next => $composableBuilder(
+      column: $table.next, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get prev => $composableBuilder(
+      column: $table.prev, builder: (column) => ColumnFilters(column));
+
+  Expression<bool> characterRefs(
+      Expression<bool> Function($$CharacterTableFilterComposer f) f) {
+    final $$CharacterTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.character,
+        getReferencedColumn: (t) => t.infoId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$CharacterTableFilterComposer(
+              $db: $db,
+              $table: $db.character,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+}
+
+class $$InfoTableOrderingComposer extends Composer<_$AppDatabase, $InfoTable> {
+  $$InfoTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get count => $composableBuilder(
+      column: $table.count, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get pages => $composableBuilder(
+      column: $table.pages, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get next => $composableBuilder(
+      column: $table.next, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get prev => $composableBuilder(
+      column: $table.prev, builder: (column) => ColumnOrderings(column));
+}
+
+class $$InfoTableAnnotationComposer
+    extends Composer<_$AppDatabase, $InfoTable> {
+  $$InfoTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get count =>
+      $composableBuilder(column: $table.count, builder: (column) => column);
+
+  GeneratedColumn<int> get pages =>
+      $composableBuilder(column: $table.pages, builder: (column) => column);
+
+  GeneratedColumn<String> get next =>
+      $composableBuilder(column: $table.next, builder: (column) => column);
+
+  GeneratedColumn<String> get prev =>
+      $composableBuilder(column: $table.prev, builder: (column) => column);
+
+  Expression<T> characterRefs<T extends Object>(
+      Expression<T> Function($$CharacterTableAnnotationComposer a) f) {
+    final $$CharacterTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.character,
+        getReferencedColumn: (t) => t.infoId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$CharacterTableAnnotationComposer(
+              $db: $db,
+              $table: $db.character,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+}
+
+class $$InfoTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $InfoTable,
+    InfoTable,
+    $$InfoTableFilterComposer,
+    $$InfoTableOrderingComposer,
+    $$InfoTableAnnotationComposer,
+    $$InfoTableCreateCompanionBuilder,
+    $$InfoTableUpdateCompanionBuilder,
+    (InfoTable, $$InfoTableReferences),
+    InfoTable,
+    PrefetchHooks Function({bool characterRefs})> {
+  $$InfoTableTableManager(_$AppDatabase db, $InfoTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$InfoTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$InfoTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$InfoTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<int> count = const Value.absent(),
+            Value<int> pages = const Value.absent(),
+            Value<String> next = const Value.absent(),
+            Value<String> prev = const Value.absent(),
+          }) =>
+              InfoCompanion(
+            id: id,
+            count: count,
+            pages: pages,
+            next: next,
+            prev: prev,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required int count,
+            required int pages,
+            required String next,
+            required String prev,
+          }) =>
+              InfoCompanion.insert(
+            id: id,
+            count: count,
+            pages: pages,
+            next: next,
+            prev: prev,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) =>
+                  (e.readTable(table), $$InfoTableReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: ({characterRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [if (characterRefs) db.character],
+              addJoins: null,
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (characterRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable:
+                            $$InfoTableReferences._characterRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$InfoTableReferences(db, table, p0).characterRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.infoId == item.id),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
+        ));
+}
+
+typedef $$InfoTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $InfoTable,
+    InfoTable,
+    $$InfoTableFilterComposer,
+    $$InfoTableOrderingComposer,
+    $$InfoTableAnnotationComposer,
+    $$InfoTableCreateCompanionBuilder,
+    $$InfoTableUpdateCompanionBuilder,
+    (InfoTable, $$InfoTableReferences),
+    InfoTable,
+    PrefetchHooks Function({bool characterRefs})>;
+typedef $$LocationTableCreateCompanionBuilder = LocationCompanion Function({
+  Value<int> id,
+  required String name,
+  required String url,
+});
+typedef $$LocationTableUpdateCompanionBuilder = LocationCompanion Function({
+  Value<int> id,
+  Value<String> name,
+  Value<String> url,
+});
+
+class $$LocationTableFilterComposer
+    extends Composer<_$AppDatabase, $LocationTable> {
+  $$LocationTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get url => $composableBuilder(
+      column: $table.url, builder: (column) => ColumnFilters(column));
+}
+
+class $$LocationTableOrderingComposer
+    extends Composer<_$AppDatabase, $LocationTable> {
+  $$LocationTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get url => $composableBuilder(
+      column: $table.url, builder: (column) => ColumnOrderings(column));
+}
+
+class $$LocationTableAnnotationComposer
+    extends Composer<_$AppDatabase, $LocationTable> {
+  $$LocationTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get url =>
+      $composableBuilder(column: $table.url, builder: (column) => column);
+}
+
+class $$LocationTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $LocationTable,
+    LocationTable,
+    $$LocationTableFilterComposer,
+    $$LocationTableOrderingComposer,
+    $$LocationTableAnnotationComposer,
+    $$LocationTableCreateCompanionBuilder,
+    $$LocationTableUpdateCompanionBuilder,
+    (
+      LocationTable,
+      BaseReferences<_$AppDatabase, $LocationTable, LocationTable>
+    ),
+    LocationTable,
+    PrefetchHooks Function()> {
+  $$LocationTableTableManager(_$AppDatabase db, $LocationTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$LocationTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$LocationTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$LocationTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<String> url = const Value.absent(),
+          }) =>
+              LocationCompanion(
+            id: id,
+            name: name,
+            url: url,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required String name,
+            required String url,
+          }) =>
+              LocationCompanion.insert(
+            id: id,
+            name: name,
+            url: url,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$LocationTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $LocationTable,
+    LocationTable,
+    $$LocationTableFilterComposer,
+    $$LocationTableOrderingComposer,
+    $$LocationTableAnnotationComposer,
+    $$LocationTableCreateCompanionBuilder,
+    $$LocationTableUpdateCompanionBuilder,
+    (
+      LocationTable,
+      BaseReferences<_$AppDatabase, $LocationTable, LocationTable>
+    ),
+    LocationTable,
+    PrefetchHooks Function()>;
+typedef $$ResultTableCreateCompanionBuilder = ResultCompanion Function({
+  Value<int> id,
+  required int characterId,
+  required String name,
+  required String status,
+  required String species,
+  required String type,
+  required String gender,
+  required int originId,
+  required int locationId,
+  required String image,
+  required List<String> episodes,
+  required String url,
+  required String created,
+});
+typedef $$ResultTableUpdateCompanionBuilder = ResultCompanion Function({
+  Value<int> id,
+  Value<int> characterId,
+  Value<String> name,
+  Value<String> status,
+  Value<String> species,
+  Value<String> type,
+  Value<String> gender,
+  Value<int> originId,
+  Value<int> locationId,
+  Value<String> image,
+  Value<List<String>> episodes,
+  Value<String> url,
+  Value<String> created,
+});
+
+final class $$ResultTableReferences
+    extends BaseReferences<_$AppDatabase, $ResultTable, ResultTable> {
+  $$ResultTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $LocationTable _originIdTable(_$AppDatabase db) => db.location
+      .createAlias($_aliasNameGenerator(db.result.originId, db.location.id));
+
+  $$LocationTableProcessedTableManager get originId {
+    final manager = $$LocationTableTableManager($_db, $_db.location)
+        .filter((f) => f.id($_item.originId));
+    final item = $_typedResult.readTableOrNull(_originIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+
+  static $LocationTable _locationIdTable(_$AppDatabase db) => db.location
+      .createAlias($_aliasNameGenerator(db.result.locationId, db.location.id));
+
+  $$LocationTableProcessedTableManager get locationId {
+    final manager = $$LocationTableTableManager($_db, $_db.location)
+        .filter((f) => f.id($_item.locationId));
+    final item = $_typedResult.readTableOrNull(_locationIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+
+  static MultiTypedResultKey<$CharacterTable, List<EpisodeTable>>
+      _characterRefsTable(_$AppDatabase db) =>
+          MultiTypedResultKey.fromTable(db.character,
+              aliasName:
+                  $_aliasNameGenerator(db.result.id, db.character.characterId));
+
+  $$CharacterTableProcessedTableManager get characterRefs {
+    final manager = $$CharacterTableTableManager($_db, $_db.character)
+        .filter((f) => f.characterId.id($_item.id));
+
+    final cache = $_typedResult.readTableOrNull(_characterRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+}
+
+class $$ResultTableFilterComposer
+    extends Composer<_$AppDatabase, $ResultTable> {
+  $$ResultTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get characterId => $composableBuilder(
+      column: $table.characterId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get status => $composableBuilder(
+      column: $table.status, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get species => $composableBuilder(
+      column: $table.species, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get type => $composableBuilder(
+      column: $table.type, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get gender => $composableBuilder(
+      column: $table.gender, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get image => $composableBuilder(
+      column: $table.image, builder: (column) => ColumnFilters(column));
+
+  ColumnWithTypeConverterFilters<List<String>, List<String>, String>
+      get episodes => $composableBuilder(
+          column: $table.episodes,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
+
+  ColumnFilters<String> get url => $composableBuilder(
+      column: $table.url, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get created => $composableBuilder(
+      column: $table.created, builder: (column) => ColumnFilters(column));
+
+  $$LocationTableFilterComposer get originId {
+    final $$LocationTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.originId,
+        referencedTable: $db.location,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$LocationTableFilterComposer(
+              $db: $db,
+              $table: $db.location,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  $$LocationTableFilterComposer get locationId {
+    final $$LocationTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.locationId,
+        referencedTable: $db.location,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$LocationTableFilterComposer(
+              $db: $db,
+              $table: $db.location,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  Expression<bool> characterRefs(
+      Expression<bool> Function($$CharacterTableFilterComposer f) f) {
+    final $$CharacterTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.character,
+        getReferencedColumn: (t) => t.characterId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$CharacterTableFilterComposer(
+              $db: $db,
+              $table: $db.character,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+}
+
+class $$ResultTableOrderingComposer
+    extends Composer<_$AppDatabase, $ResultTable> {
+  $$ResultTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get characterId => $composableBuilder(
+      column: $table.characterId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get status => $composableBuilder(
+      column: $table.status, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get species => $composableBuilder(
+      column: $table.species, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get type => $composableBuilder(
+      column: $table.type, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get gender => $composableBuilder(
+      column: $table.gender, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get image => $composableBuilder(
+      column: $table.image, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get episodes => $composableBuilder(
+      column: $table.episodes, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get url => $composableBuilder(
+      column: $table.url, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get created => $composableBuilder(
+      column: $table.created, builder: (column) => ColumnOrderings(column));
+
+  $$LocationTableOrderingComposer get originId {
+    final $$LocationTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.originId,
+        referencedTable: $db.location,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$LocationTableOrderingComposer(
+              $db: $db,
+              $table: $db.location,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  $$LocationTableOrderingComposer get locationId {
+    final $$LocationTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.locationId,
+        referencedTable: $db.location,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$LocationTableOrderingComposer(
+              $db: $db,
+              $table: $db.location,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$ResultTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ResultTable> {
+  $$ResultTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get characterId => $composableBuilder(
+      column: $table.characterId, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get status =>
+      $composableBuilder(column: $table.status, builder: (column) => column);
+
+  GeneratedColumn<String> get species =>
+      $composableBuilder(column: $table.species, builder: (column) => column);
+
+  GeneratedColumn<String> get type =>
+      $composableBuilder(column: $table.type, builder: (column) => column);
+
+  GeneratedColumn<String> get gender =>
+      $composableBuilder(column: $table.gender, builder: (column) => column);
+
+  GeneratedColumn<String> get image =>
+      $composableBuilder(column: $table.image, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<List<String>, String> get episodes =>
+      $composableBuilder(column: $table.episodes, builder: (column) => column);
+
+  GeneratedColumn<String> get url =>
+      $composableBuilder(column: $table.url, builder: (column) => column);
+
+  GeneratedColumn<String> get created =>
+      $composableBuilder(column: $table.created, builder: (column) => column);
+
+  $$LocationTableAnnotationComposer get originId {
+    final $$LocationTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.originId,
+        referencedTable: $db.location,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$LocationTableAnnotationComposer(
+              $db: $db,
+              $table: $db.location,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  $$LocationTableAnnotationComposer get locationId {
+    final $$LocationTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.locationId,
+        referencedTable: $db.location,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$LocationTableAnnotationComposer(
+              $db: $db,
+              $table: $db.location,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  Expression<T> characterRefs<T extends Object>(
+      Expression<T> Function($$CharacterTableAnnotationComposer a) f) {
+    final $$CharacterTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.character,
+        getReferencedColumn: (t) => t.characterId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$CharacterTableAnnotationComposer(
+              $db: $db,
+              $table: $db.character,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+}
+
+class $$ResultTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $ResultTable,
+    ResultTable,
+    $$ResultTableFilterComposer,
+    $$ResultTableOrderingComposer,
+    $$ResultTableAnnotationComposer,
+    $$ResultTableCreateCompanionBuilder,
+    $$ResultTableUpdateCompanionBuilder,
+    (ResultTable, $$ResultTableReferences),
+    ResultTable,
+    PrefetchHooks Function(
+        {bool originId, bool locationId, bool characterRefs})> {
+  $$ResultTableTableManager(_$AppDatabase db, $ResultTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ResultTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ResultTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ResultTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<int> characterId = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<String> status = const Value.absent(),
+            Value<String> species = const Value.absent(),
+            Value<String> type = const Value.absent(),
+            Value<String> gender = const Value.absent(),
+            Value<int> originId = const Value.absent(),
+            Value<int> locationId = const Value.absent(),
+            Value<String> image = const Value.absent(),
+            Value<List<String>> episodes = const Value.absent(),
+            Value<String> url = const Value.absent(),
+            Value<String> created = const Value.absent(),
+          }) =>
+              ResultCompanion(
+            id: id,
+            characterId: characterId,
+            name: name,
+            status: status,
+            species: species,
+            type: type,
+            gender: gender,
+            originId: originId,
+            locationId: locationId,
+            image: image,
+            episodes: episodes,
+            url: url,
+            created: created,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required int characterId,
+            required String name,
+            required String status,
+            required String species,
+            required String type,
+            required String gender,
+            required int originId,
+            required int locationId,
+            required String image,
+            required List<String> episodes,
+            required String url,
+            required String created,
+          }) =>
+              ResultCompanion.insert(
+            id: id,
+            characterId: characterId,
+            name: name,
+            status: status,
+            species: species,
+            type: type,
+            gender: gender,
+            originId: originId,
+            locationId: locationId,
+            image: image,
+            episodes: episodes,
+            url: url,
+            created: created,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) =>
+                  (e.readTable(table), $$ResultTableReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: (
+              {originId = false, locationId = false, characterRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [if (characterRefs) db.character],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (originId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.originId,
+                    referencedTable: $$ResultTableReferences._originIdTable(db),
+                    referencedColumn:
+                        $$ResultTableReferences._originIdTable(db).id,
+                  ) as T;
+                }
+                if (locationId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.locationId,
+                    referencedTable:
+                        $$ResultTableReferences._locationIdTable(db),
+                    referencedColumn:
+                        $$ResultTableReferences._locationIdTable(db).id,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (characterRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable:
+                            $$ResultTableReferences._characterRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$ResultTableReferences(db, table, p0)
+                                .characterRefs,
+                        referencedItemsForCurrentItem:
+                            (item, referencedItems) => referencedItems
+                                .where((e) => e.characterId == item.id),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
+        ));
+}
+
+typedef $$ResultTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $ResultTable,
+    ResultTable,
+    $$ResultTableFilterComposer,
+    $$ResultTableOrderingComposer,
+    $$ResultTableAnnotationComposer,
+    $$ResultTableCreateCompanionBuilder,
+    $$ResultTableUpdateCompanionBuilder,
+    (ResultTable, $$ResultTableReferences),
+    ResultTable,
+    PrefetchHooks Function(
+        {bool originId, bool locationId, bool characterRefs})>;
+typedef $$CharacterTableCreateCompanionBuilder = CharacterCompanion Function({
+  Value<int> id,
+  required int infoId,
+  required int characterId,
+});
+typedef $$CharacterTableUpdateCompanionBuilder = CharacterCompanion Function({
+  Value<int> id,
+  Value<int> infoId,
+  Value<int> characterId,
+});
+
+final class $$CharacterTableReferences
+    extends BaseReferences<_$AppDatabase, $CharacterTable, EpisodeTable> {
+  $$CharacterTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $InfoTable _infoIdTable(_$AppDatabase db) => db.info
+      .createAlias($_aliasNameGenerator(db.character.infoId, db.info.id));
+
+  $$InfoTableProcessedTableManager get infoId {
+    final manager = $$InfoTableTableManager($_db, $_db.info)
+        .filter((f) => f.id($_item.infoId));
+    final item = $_typedResult.readTableOrNull(_infoIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+
+  static $ResultTable _characterIdTable(_$AppDatabase db) =>
+      db.result.createAlias(
+          $_aliasNameGenerator(db.character.characterId, db.result.id));
+
+  $$ResultTableProcessedTableManager get characterId {
+    final manager = $$ResultTableTableManager($_db, $_db.result)
+        .filter((f) => f.id($_item.characterId));
+    final item = $_typedResult.readTableOrNull(_characterIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+}
+
+class $$CharacterTableFilterComposer
+    extends Composer<_$AppDatabase, $CharacterTable> {
+  $$CharacterTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  $$InfoTableFilterComposer get infoId {
+    final $$InfoTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.infoId,
+        referencedTable: $db.info,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$InfoTableFilterComposer(
+              $db: $db,
+              $table: $db.info,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  $$ResultTableFilterComposer get characterId {
+    final $$ResultTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.characterId,
+        referencedTable: $db.result,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ResultTableFilterComposer(
+              $db: $db,
+              $table: $db.result,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$CharacterTableOrderingComposer
+    extends Composer<_$AppDatabase, $CharacterTable> {
+  $$CharacterTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  $$InfoTableOrderingComposer get infoId {
+    final $$InfoTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.infoId,
+        referencedTable: $db.info,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$InfoTableOrderingComposer(
+              $db: $db,
+              $table: $db.info,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  $$ResultTableOrderingComposer get characterId {
+    final $$ResultTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.characterId,
+        referencedTable: $db.result,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ResultTableOrderingComposer(
+              $db: $db,
+              $table: $db.result,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$CharacterTableAnnotationComposer
+    extends Composer<_$AppDatabase, $CharacterTable> {
+  $$CharacterTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  $$InfoTableAnnotationComposer get infoId {
+    final $$InfoTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.infoId,
+        referencedTable: $db.info,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$InfoTableAnnotationComposer(
+              $db: $db,
+              $table: $db.info,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  $$ResultTableAnnotationComposer get characterId {
+    final $$ResultTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.characterId,
+        referencedTable: $db.result,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ResultTableAnnotationComposer(
+              $db: $db,
+              $table: $db.result,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$CharacterTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $CharacterTable,
+    EpisodeTable,
+    $$CharacterTableFilterComposer,
+    $$CharacterTableOrderingComposer,
+    $$CharacterTableAnnotationComposer,
+    $$CharacterTableCreateCompanionBuilder,
+    $$CharacterTableUpdateCompanionBuilder,
+    (EpisodeTable, $$CharacterTableReferences),
+    EpisodeTable,
+    PrefetchHooks Function({bool infoId, bool characterId})> {
+  $$CharacterTableTableManager(_$AppDatabase db, $CharacterTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$CharacterTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$CharacterTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$CharacterTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<int> infoId = const Value.absent(),
+            Value<int> characterId = const Value.absent(),
+          }) =>
+              CharacterCompanion(
+            id: id,
+            infoId: infoId,
+            characterId: characterId,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required int infoId,
+            required int characterId,
+          }) =>
+              CharacterCompanion.insert(
+            id: id,
+            infoId: infoId,
+            characterId: characterId,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$CharacterTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({infoId = false, characterId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (infoId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.infoId,
+                    referencedTable:
+                        $$CharacterTableReferences._infoIdTable(db),
+                    referencedColumn:
+                        $$CharacterTableReferences._infoIdTable(db).id,
+                  ) as T;
+                }
+                if (characterId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.characterId,
+                    referencedTable:
+                        $$CharacterTableReferences._characterIdTable(db),
+                    referencedColumn:
+                        $$CharacterTableReferences._characterIdTable(db).id,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ));
+}
+
+typedef $$CharacterTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $CharacterTable,
+    EpisodeTable,
+    $$CharacterTableFilterComposer,
+    $$CharacterTableOrderingComposer,
+    $$CharacterTableAnnotationComposer,
+    $$CharacterTableCreateCompanionBuilder,
+    $$CharacterTableUpdateCompanionBuilder,
+    (EpisodeTable, $$CharacterTableReferences),
+    EpisodeTable,
+    PrefetchHooks Function({bool infoId, bool characterId})>;
+
+class $AppDatabaseManager {
+  final _$AppDatabase _db;
+  $AppDatabaseManager(this._db);
+  $$InfoTableTableManager get info => $$InfoTableTableManager(_db, _db.info);
+  $$LocationTableTableManager get location =>
+      $$LocationTableTableManager(_db, _db.location);
+  $$ResultTableTableManager get result =>
+      $$ResultTableTableManager(_db, _db.result);
+  $$CharacterTableTableManager get character =>
+      $$CharacterTableTableManager(_db, _db.character);
+}

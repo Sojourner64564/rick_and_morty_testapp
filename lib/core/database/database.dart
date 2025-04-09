@@ -7,15 +7,6 @@ import 'dart:io';
 
 part 'database.g.dart';
 
-@DriftDatabase(
-  tables: [
-    Character,
-    Info,
-    Result,
-    Location,
-  ],
-)
-
 @DataClassName('EpisodeTable')
 class Character extends Table {
   IntColumn get id => integer().autoIncrement()();
@@ -77,6 +68,14 @@ MigrationStrategy get migration {
   );
 }
 
+@DriftDatabase(
+  tables: [
+    Character,
+    Info,
+    Result,
+    Location,
+  ],
+)
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(NativeDatabase.memory());
 
