@@ -1,5 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
+import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 import 'dart:convert';
@@ -7,11 +8,11 @@ import 'dart:io';
 
 part 'database.g.dart';
 
-@DataClassName('EpisodeTable')
+/*@DataClassName('EpisodeTable')
 class Character extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get infoId => integer().references(Info, #id)();
-  IntColumn get characterId => integer().references(Result, #id)();
+  IntColumn get resultId0 => integer().references(Result, #id)();
 }
 @DataClassName('InfoTable')
 class Info extends Table {
@@ -20,7 +21,7 @@ class Info extends Table {
   IntColumn get pages => integer()();
   TextColumn get next => text()();
   TextColumn get prev => text()();
-}
+}*/
 @DataClassName('ResultTable')
 class Result extends Table {
   IntColumn get id => integer().autoIncrement()();
@@ -68,10 +69,11 @@ MigrationStrategy get migration {
   );
 }
 
+@lazySingleton
 @DriftDatabase(
   tables: [
-    Character,
-    Info,
+ /*   Character,
+    Info,*/
     Result,
     Location,
   ],
@@ -82,7 +84,6 @@ class AppDatabase extends _$AppDatabase {
   @override
   int get schemaVersion => 1;
 
-  @override
   LazyDatabase _openConnection() {
     return LazyDatabase(() async {
       final dbFolder = await getApplicationDocumentsDirectory();

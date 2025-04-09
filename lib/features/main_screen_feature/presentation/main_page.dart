@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty_testapp/core/assets/app_textstyles.dart';
 import 'package:rick_and_morty_testapp/core/injectable/injectable.dart';
+import 'package:rick_and_morty_testapp/features/common_feature/presentation/widget/character_card_widget.dart';
 import 'package:rick_and_morty_testapp/features/main_screen_feature/presentation/controller/fetch_characters_cubit/fetch_characters_cubit.dart';
-import 'package:rick_and_morty_testapp/features/main_screen_feature/presentation/widget/character_card_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainPage extends StatefulWidget {
@@ -52,7 +52,11 @@ class _MainPageState extends State<MainPage> {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CharacterCardWidget(
+                  onTap: () {
+
+                  },
                   resultEntity: state.characterEntity.results[index],
+                  isFavorite: true,
                 ),
               );
             },

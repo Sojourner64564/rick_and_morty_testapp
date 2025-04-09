@@ -12,7 +12,7 @@ class FetchCharactersCubit extends Cubit<FetchCharactersState> {
 
   final FetchCharactersUC _fetchCharactersUC;
 
-  Future<void> fetchCharacters() async{
+  void fetchCharacters() {
     emit(FetchCharactersStateLoading());
     _fetchCharactersUC.fetchCharacters().then((entity){
       emit(FetchCharactersStateLoaded(entity));

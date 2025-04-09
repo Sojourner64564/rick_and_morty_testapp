@@ -15,6 +15,10 @@ import 'package:internet_connection_checker/internet_connection_checker.dart'
 
 import '../../features/common_feature/data/remote_ds/retrofit_remote_client.dart'
     as _i198;
+import '../../features/common_feature/data/repository_impl/database_favorite_repository_impl.dart'
+    as _i366;
+import '../../features/common_feature/domain/repository/database_repository.dart'
+    as _i1060;
 import '../../features/main_screen_feature/data/repository_impl/fetch_characters_repository_impl.dart'
     as _i733;
 import '../../features/main_screen_feature/domain/repository/fetch_characters_repository.dart'
@@ -23,6 +27,7 @@ import '../../features/main_screen_feature/domain/usecase/fetch_characters_uc.da
     as _i293;
 import '../../features/main_screen_feature/presentation/controller/fetch_characters_cubit/fetch_characters_cubit.dart'
     as _i860;
+import '../database/database.dart' as _i660;
 import '../network/internet_connection_checker.dart' as _i657;
 import '../network/network_info.dart' as _i932;
 import '../network/network_info_impl.dart' as _i865;
@@ -44,7 +49,10 @@ _i174.GetIt $initGetIt(
       () => registerModuleConnectionChecker.internetConnection);
   gh.factory<_i198.RetrofitRemoteClientInstance>(
       () => _i198.RetrofitRemoteClientInstance());
+  gh.lazySingleton<_i660.AppDatabase>(() => _i660.AppDatabase());
   gh.lazySingleton<_i1007.AppRouter>(() => _i1007.AppRouter());
+  gh.lazySingleton<_i1060.DatabaseFavoriteRepository>(
+      () => _i366.DatabaseFavoriteRepositoryImpl(gh<_i660.AppDatabase>()));
   gh.lazySingleton<_i932.NetworkInfo>(
       () => _i865.NetworkInfoImpl(gh<_i973.InternetConnectionChecker>()));
   gh.lazySingleton<_i475.FetchCharactersRepository>(
