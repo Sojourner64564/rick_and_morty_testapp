@@ -16,7 +16,21 @@ class DatabaseFavoriteUC implements DatabaseFavoriteRepository{
 
   @override
   Future<void> saveToDB(ResultEntity resultEntity) async{
-    return await _databaseFavoriteRepository.saveToDB(resultEntity);
+    final allFavoritesCharacter = await _databaseFavoriteRepository.loadFromDB();
+    final List<ResultEntity> overlapResultEntity = [];
+    allFavoritesCharacter.forEach((value){
+      if(value.id==resultEntity.id){
+        overlapResultEntity.add(value);
+      }
+    });
+    overlapResultEntity.forEach((value){
+       _databaseFavoriteRepository.deleteFromDB(value.id);
+    });
+    print("overlap list $overlapResultEntity");
+    if(overlapResultEntity.isEmpty){
+      print('dfdfd');
+      return await _databaseFavoriteRepository.saveToDB(resultEntity);
+    }
   }
 
   @override
@@ -28,6 +42,16 @@ class DatabaseFavoriteUC implements DatabaseFavoriteRepository{
     await Future.delayed(const Duration(milliseconds: 300));
     return await _databaseFavoriteRepository.loadNameFilteredFromDB(text);
 
+  }
+
+  @override
+  Future<List<int>> favoriteIds() async{
+    return await _databaseFavoriteRepository.favoriteIds();
+  }
+
+  @override
+  void deleteFromDB(int characterId){
+    return  _databaseFavoriteRepository.deleteFromDB(characterId);
   }
 
 }

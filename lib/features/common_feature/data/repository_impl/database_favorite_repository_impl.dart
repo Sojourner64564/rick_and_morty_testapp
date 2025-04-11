@@ -139,4 +139,27 @@ class DatabaseFavoriteRepositoryImpl implements DatabaseFavoriteRepository {
       throw DataBaseFailure();
     }
   }
+
+  @override
+  Future<List<int>> favoriteIds() async{
+    try{
+      final resultTable = await appDatabase.select(appDatabase.result).get();
+      final List<int> charactersIds = [];
+      for(final element in resultTable){
+        charactersIds.add(element.characterId);
+      }
+      return charactersIds;
+    }catch(e){
+      throw DataBaseFailure();
+    }
+  }
+
+  @override
+  void deleteFromDB(int characterId) {
+    try{
+      appDatabase.delete(appDatabase.result).where((row)=>row.characterId.equals(characterId));
+    }catch(e){
+      throw DataBaseFailure();
+    }
+  }
 }

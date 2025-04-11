@@ -8,20 +8,6 @@ import 'dart:io';
 
 part 'database.g.dart';
 
-/*@DataClassName('EpisodeTable')
-class Character extends Table {
-  IntColumn get id => integer().autoIncrement()();
-  IntColumn get infoId => integer().references(Info, #id)();
-  IntColumn get resultId0 => integer().references(Result, #id)();
-}
-@DataClassName('InfoTable')
-class Info extends Table {
-  IntColumn get id => integer().autoIncrement()();
-  IntColumn get count => integer()();
-  IntColumn get pages => integer()();
-  TextColumn get next => text()();
-  TextColumn get prev => text()();
-}*/
 @DataClassName('ResultTable')
 class Result extends Table {
   IntColumn get id => integer().autoIncrement()();
@@ -31,8 +17,8 @@ class Result extends Table {
   TextColumn get species => text()();
   TextColumn get type => text()();
   TextColumn get gender => text()();
-  IntColumn get originId => integer().references(Location, #id)();
-  IntColumn get locationId => integer().references(Location, #id)();
+  IntColumn get originId => integer().references(Location, #id, onDelete: KeyAction.cascade)(); // каскадное удлание
+  IntColumn get locationId => integer().references(Location, #id, onDelete: KeyAction.cascade)();// каскадное удлание
   TextColumn get image => text()();
   TextColumn get episodes => text().map(const StringListConverter())();
   TextColumn get url => text()();
@@ -73,8 +59,6 @@ MigrationStrategy get migration {
 @lazySingleton
 @DriftDatabase(
   tables: [
- /*   Character,
-    Info,*/
     Result,
     Location,
   ],

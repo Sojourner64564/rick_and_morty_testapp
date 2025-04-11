@@ -4,4 +4,7 @@ abstract class DatabaseFavoriteRepository{
   Future<void> saveToDB(ResultEntity resultEntity);
   Future<List<ResultEntity>> loadFromDB();
   Future<List<ResultEntity>> loadNameFilteredFromDB(String text);
+  Future<List<int>> favoriteIds();
+  void deleteFromDB(int characterId);
+
 }

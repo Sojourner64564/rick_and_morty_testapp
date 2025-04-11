@@ -270,8 +270,8 @@ class $ResultTable extends Result with TableInfo<$ResultTable, ResultTable> {
       'origin_id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: true,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('REFERENCES location (id)'));
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES location (id) ON DELETE CASCADE'));
   static const VerificationMeta _locationIdMeta =
       const VerificationMeta('locationId');
   @override
@@ -279,8 +279,8 @@ class $ResultTable extends Result with TableInfo<$ResultTable, ResultTable> {
       'location_id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: true,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('REFERENCES location (id)'));
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES location (id) ON DELETE CASCADE'));
   static const VerificationMeta _imageMeta = const VerificationMeta('image');
   @override
   late final GeneratedColumn<String> image = GeneratedColumn<String>(
@@ -845,6 +845,25 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [location, result];
+  @override
+  StreamQueryUpdateRules get streamUpdateRules => const StreamQueryUpdateRules(
+        [
+          WritePropagation(
+            on: TableUpdateQuery.onTableName('location',
+                limitUpdateKind: UpdateKind.delete),
+            result: [
+              TableUpdate('result', kind: UpdateKind.delete),
+            ],
+          ),
+          WritePropagation(
+            on: TableUpdateQuery.onTableName('location',
+                limitUpdateKind: UpdateKind.delete),
+            result: [
+              TableUpdate('result', kind: UpdateKind.delete),
+            ],
+          ),
+        ],
+      );
 }
 
 typedef $$LocationTableCreateCompanionBuilder = LocationCompanion Function({

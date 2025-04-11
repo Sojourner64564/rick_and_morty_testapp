@@ -4,22 +4,22 @@ import 'package:rick_and_morty_testapp/core/injectable/injectable.dart';
 import 'package:rick_and_morty_testapp/features/common_feature/presentation/controller/favorite_card_controller/favorite_card_controller.dart';
 import 'package:rick_and_morty_testapp/features/common_feature/presentation/widget/character_card_widget.dart';
 import 'package:rick_and_morty_testapp/features/favorites_screen_feature/presentation/controller/sorted_favorites_cubit/sorted_favorites_cubit.dart';
+import 'package:rick_and_morty_testapp/features/main_screen_feature/presentation/controller/favorite_button_controller/favorite_button_cubit.dart';
 import 'package:rick_and_morty_testapp/features/main_screen_feature/presentation/controller/fetch_characters_cubit/fetch_characters_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainPage extends StatefulWidget {
-   MainPage({super.key});
+  MainPage({super.key});
   final fetchCharactersCubit = getIt<FetchCharactersCubit>();
-   final sortedFavoritesCubit = getIt<SortedFavoritesCubit>();
-   final favoriteCardController = getIt<FavoriteCardController>();
+  final sortedFavoritesCubit = getIt<SortedFavoritesCubit>();
+  final favoriteCardController = getIt<FavoriteCardController>();
+  final favoriteButtonCubit = getIt<FavoriteButtonCubit>();
 
   @override
   State<MainPage> createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
-
-
   @override
   void initState() {
     widget.fetchCharactersCubit.fetchCharacters();
@@ -31,51 +31,59 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<FetchCharactersCubit, FetchCharactersState>(
       bloc: widget.fetchCharactersCubit,
-      builder: (context, state) {
-        if (state is FetchCharactersStateInitial) {
+      builder: (context, fetchCharacterState) {
+        if (fetchCharacterState is FetchCharactersStateInitial) {
           return const Center(
             child: Text(
               'Initial',
               style: AppTextstyles.w700Text20Black,
             ),
-          );        }
-        if (state is FetchCharactersStateLoading) {
-          return const Center(
-              child: Text(
-                'Loading',
-                style: AppTextstyles.w700Text20Black,
-              ),
           );
         }
-        if (state is FetchCharactersStateLoaded) {
+        if (fetchCharacterState is FetchCharactersStateLoading) {
+          return const Center(
+            child: Text(
+              'Loading',
+              style: AppTextstyles.w700Text20Black,
+            ),
+          );
+        }
+        if (fetchCharacterState is FetchCharactersStateLoaded) {
           return GridView.builder(
-            itemCount: state.characterEntity.results.length,
+            itemCount: fetchCharacterState.characterEntity.results.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 0.65,
             ),
             itemBuilder: (BuildContext context, int index) {
+              final result = fetchCharacterState.characterEntity.results[index];
               return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CharacterCardWidget(
-                  onTap: () {
-                    widget.favoriteCardController.saveFavoriteCard(state.characterEntity.results[index]);
+                child: BlocBuilder<FavoriteButtonCubit, FavoriteButtonState>(
+                  bloc: widget.favoriteButtonCubit,
+                  builder: (context, favoriteButtonState) {
+                    return CharacterCardWidget(
+                      onTap: () {
+                        widget.favoriteCardController.saveFavoriteCard(result);
+                      },
+                      resultEntity: fetchCharacterState.characterEntity.results[index],
+                      isFavorite: widget.favoriteButtonCubit.isCharacterFavorite(result.id),
+                    );
                   },
-                  resultEntity: state.characterEntity.results[index],
-                  isFavorite: true,
                 ),
               );
             },
           );
         }
-        if (state is FetchCharactersStateNoInternetError) {
+        if (fetchCharacterState is FetchCharactersStateNoInternetError) {
           return const Center(
             child: Text(
               'No Internet',
               style: AppTextstyles.w700Text20Black,
             ),
-          );        }
-        if(state is FetchCharactersStateError){
+          );
+        }
+        if (fetchCharacterState is FetchCharactersStateError) {
           return const Center(
             child: Text(
               'Error',
@@ -88,7 +96,8 @@ class _MainPageState extends State<MainPage> {
               'Unexpected error',
               style: AppTextstyles.w700Text20Black,
             ),
-          );        }
+          );
+        }
       },
     );
   }
