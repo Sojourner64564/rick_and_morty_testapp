@@ -26,5 +26,5 @@ class FavoriteButtonCubit extends Cubit<FavoriteButtonState>{
     emit(FavoriteButtonState());
   }
 }
-
+//TODO сделать без такого момента
 class FavoriteButtonState{}
