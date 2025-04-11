@@ -8,6 +8,6 @@
 
  Flutter 3.24.2 / Dart 3.5.2
  
-<img src="https://raw.githubusercontent.com/Sojourner64564/rick_and_morty_testapp/refs/heads/master/images_for_readme/1.png">
-<img src="https://raw.githubusercontent.com/Sojourner64564/rick_and_morty_testapp/refs/heads/master/images_for_readme/2.png">
-<img src="https://raw.githubusercontent.com/Sojourner64564/rick_and_morty_testapp/refs/heads/master/images_for_readme/3.png">
+<img src="https://raw.githubusercontent.com/Sojourner64564/rick_and_morty_testapp/refs/heads/master/images_for_readme/1.png" , width="250">
+<img src="https://raw.githubusercontent.com/Sojourner64564/rick_and_morty_testapp/refs/heads/master/images_for_readme/2.png" , width="250">
+<img src="https://raw.githubusercontent.com/Sojourner64564/rick_and_morty_testapp/refs/heads/master/images_for_readme/3.png" , width="250">
