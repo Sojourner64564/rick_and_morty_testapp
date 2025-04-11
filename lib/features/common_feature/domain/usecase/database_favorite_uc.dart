@@ -16,6 +16,7 @@ class DatabaseFavoriteUC implements DatabaseFavoriteRepository{
 
   @override
   Future<void> saveToDB(ResultEntity resultEntity) async{
+    // логика для удаление из дазы данных при повторном нажатии на кнопку
     final allFavoritesCharacter = await _databaseFavoriteRepository.loadFromDB();
     final List<ResultEntity> overlapResultEntity = [];
     allFavoritesCharacter.forEach((value){
@@ -26,9 +27,7 @@ class DatabaseFavoriteUC implements DatabaseFavoriteRepository{
     overlapResultEntity.forEach((value){
        _databaseFavoriteRepository.deleteFromDB(value.id);
     });
-    print("overlap list $overlapResultEntity");
     if(overlapResultEntity.isEmpty){
-      print('dfdfd');
       return await _databaseFavoriteRepository.saveToDB(resultEntity);
     }
   }

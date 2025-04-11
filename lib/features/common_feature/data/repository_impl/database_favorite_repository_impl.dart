@@ -155,9 +155,9 @@ class DatabaseFavoriteRepositoryImpl implements DatabaseFavoriteRepository {
   }
 
   @override
-  void deleteFromDB(int characterId) {
+  void deleteFromDB(int characterId){
     try{
-      appDatabase.delete(appDatabase.result).where((row)=>row.characterId.equals(characterId));
+      appDatabase.delete(appDatabase.result)..where((row)=>row.characterId.isValue(characterId))..go();
     }catch(e){
       throw DataBaseFailure();
     }

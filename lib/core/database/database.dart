@@ -64,10 +64,13 @@ MigrationStrategy get migration {
   ],
 )
 class AppDatabase extends _$AppDatabase {
+  //TODO поставить сюда настоящую базу данных как будет закончено
   AppDatabase() : super(NativeDatabase.memory());
 
   @override
   int get schemaVersion => 1;
+
+
 
   LazyDatabase _openConnection() {
     return LazyDatabase(() async {
