@@ -20,11 +20,22 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  final scrollController = ScrollController();
+
   @override
   void initState() {
     widget.fetchCharactersCubit.fetchCharacters();
     widget.sortedFavoritesCubit.loadCharactersWithoutFilter();
+    scrollController.addListener((){
+      widget.fetchCharactersCubit.fetchPaginatedCharacters(scrollController.offset, scrollController.position.maxScrollExtent);
+    });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -51,6 +62,7 @@ class _MainPageState extends State<MainPage> {
         if (fetchCharacterState is FetchCharactersStateLoaded) {
           return GridView.builder(
             itemCount: fetchCharacterState.characterEntity.results.length,
+            controller: scrollController,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 0.65,

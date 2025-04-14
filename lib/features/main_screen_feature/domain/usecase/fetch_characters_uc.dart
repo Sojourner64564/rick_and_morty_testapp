@@ -12,4 +12,9 @@ class FetchCharactersUC implements FetchCharactersRepository{
   Future<CharacterEntity> fetchCharacters() async{
     return await fetchCharactersRepository.fetchCharacters();
   }
+
+  @override
+  Future<CharacterEntity> fetchPaginatedCharacters(String url) async{
+    return await fetchCharactersRepository.fetchPaginatedCharacters(url);
+  }
 }

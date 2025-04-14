@@ -21,4 +21,12 @@ class FetchCharactersRepositoryImpl implements FetchCharactersRepository{
     return entity;
   }
 
+  @override
+  Future<CharacterEntity> fetchPaginatedCharacters(String url) async{
+    if(! await networkInfo.isConnected) throw NoInternetFailure();
+    final model = await retrofitRemoteClientInstance.client().fetchPaginatedCharacters(url);
+    final entity = model.toEntity();
+    return entity;
+  }
+
 }

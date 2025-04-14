@@ -13,9 +13,7 @@ class _RetrofitRemoteClient implements RetrofitRemoteClient {
     this._dio, {
     this.baseUrl,
     this.errorLogger,
-  }) {
-    baseUrl ??= 'https://rickandmortyapi.com/api';
-  }
+  });
 
   final Dio _dio;
 
@@ -36,7 +34,40 @@ class _RetrofitRemoteClient implements RetrofitRemoteClient {
     )
         .compose(
           _dio.options,
-          '/character',
+          'https://rickandmortyapi.com/api/character',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late CharacterModel _value;
+    try {
+      _value = CharacterModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<CharacterModel> fetchPaginatedCharacters(String url) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<CharacterModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '${url}',
           queryParameters: queryParameters,
           data: _data,
         )

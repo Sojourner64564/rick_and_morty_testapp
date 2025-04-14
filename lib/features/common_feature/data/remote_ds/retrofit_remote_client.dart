@@ -1,16 +1,24 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:rick_and_morty_testapp/core/links/url_links.dart';
 import 'package:rick_and_morty_testapp/features/main_screen_feature/data/model/character_model.dart';
 
 part 'retrofit_remote_client.g.dart';
 
-@RestApi(baseUrl: 'https://rickandmortyapi.com/api')
+@RestApi()
 abstract class RetrofitRemoteClient {
-  factory RetrofitRemoteClient(Dio dio, {String? baseUrl}) = _RetrofitRemoteClient;
+  factory RetrofitRemoteClient(Dio dio, {String? baseUrl}) =
+      _RetrofitRemoteClient;
 
-  @GET('/character')
+  @GET(UrlLinks.fetchFirstCharacterPage)
   Future<CharacterModel> fetchCharacters();
+
+  /// Ссылка полностью береться из JSON
+  @GET('{url}')
+  Future<CharacterModel> fetchPaginatedCharacters(
+    @Path('url') String url,
+  );
 
 /*  @GET('/top-headlines?category={category}&apiKey={apiKey}')
   Future<NewsModel> fetchNewsByTopic({
