@@ -8,13 +8,11 @@ import 'package:path/path.dart' as p;
 
 @lazySingleton
 class CacheDatabase extends AppDatabase{
-  CacheDatabase(): super(NativeDatabase.memory());
-
-  LazyDatabase _openConnection() {
+  CacheDatabase(): super(LazyDatabase(() async{
     return LazyDatabase(() async {
       final dbFolder = await getApplicationDocumentsDirectory();
       final file = File(p.join(dbFolder.path, 'cache_card_rick_and_morty.sqlite'));
       return NativeDatabase(file);
     });
-  }
+  }));
 }

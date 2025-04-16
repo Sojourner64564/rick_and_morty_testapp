@@ -25,6 +25,8 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     widget.fetchCharactersCubit.fetchCharacters();
+    widget.favoriteButtonCubit.updateFavoriteIdsList();
+    widget.favoriteButtonCubit.rebuildCharacterCards();
     widget.sortedFavoritesCubit.loadCharactersWithoutFilter();
     scrollController.addListener((){
       widget.fetchCharactersCubit.fetchPaginatedCharacters(scrollController.offset, scrollController.position.maxScrollExtent);

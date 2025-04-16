@@ -7,6 +7,7 @@ class FavoriteButtonCubit extends Cubit<FavoriteButtonState>{
   FavoriteButtonCubit(this._databaseFavoriteUC) : super(FavoriteButtonState());
 
   final DatabaseFavoriteUC _databaseFavoriteUC;
+  //TODO сделать без такого момента
   List<int> favoriteCharacterIdsList = [];
 
   void updateFavoriteIdsList() {
