@@ -17,7 +17,11 @@ class FetchCachedUC implements AbstractFetchCachedUC{
 
   @override
   Future<void> saveCharactersToCache(CharacterEntity characterEntity) async{
-    return await _fetchCachedCharactersRepository.saveCharactersToCache(characterEntity);
+    //логика чтобы не сохранять дубликаты
+    final cached = await _fetchCachedCharactersRepository.loadCache();
+    //Разница между листами
+    final difference = characterEntity.results.where((id1) => !cached.any((id2) => id2.id == id1.id)).toList();
+    return await _fetchCachedCharactersRepository.saveCharactersToCache(difference);
   }
 
 }

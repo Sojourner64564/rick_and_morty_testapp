@@ -1,8 +1,8 @@
+import 'package:drift/drift.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rick_and_morty_testapp/core/database/cache_database.dart';
 import 'package:rick_and_morty_testapp/core/database/database.dart';
 import 'package:rick_and_morty_testapp/core/error/failure.dart';
-import 'package:rick_and_morty_testapp/features/main_screen_feature/domain/entity/character_entity.dart';
 import 'package:rick_and_morty_testapp/features/main_screen_feature/domain/entity/location_entity.dart';
 import 'package:rick_and_morty_testapp/features/main_screen_feature/domain/entity/result_entity.dart';
 import 'package:rick_and_morty_testapp/features/main_screen_feature/domain/repository/fetch_cached_characters_repository.dart';
@@ -59,21 +59,24 @@ class FetchCachedCharactersRepositoryImpl implements FetchCachedCharactersReposi
   }
 
   @override
-  Future<void> saveCharactersToCache(CharacterEntity characterEntity) async{
+  Future<void> saveCharactersToCache(List<ResultEntity> listResultEntity) async{
     try {
-      characterEntity.results.forEach((resultEntity) async{
+      listResultEntity.forEach((resultEntity) async{
         final originId = await appDatabase
             .into(appDatabase.location)
             .insert(LocationCompanion.insert(
               name: resultEntity.origin.name,
               url: resultEntity.origin.url,
-            ));
+            ),
+            mode: InsertMode.replace,
+        );
         final locationId = await appDatabase.into(appDatabase.location).insert(
               LocationCompanion.insert(
                 name: resultEntity.location.name,
                 url: resultEntity.location.url,
               ),
-            );
+          mode: InsertMode.replace,
+        );
         await appDatabase.into(appDatabase.result).insert(
               ResultCompanion.insert(
                 characterId: resultEntity.id,
@@ -89,7 +92,8 @@ class FetchCachedCharactersRepositoryImpl implements FetchCachedCharactersReposi
                 url: resultEntity.url,
                 created: resultEntity.created,
               ),
-            );
+          mode: InsertMode.replace,
+        );
       });
     }catch(e){
       throw DataBaseFailure();

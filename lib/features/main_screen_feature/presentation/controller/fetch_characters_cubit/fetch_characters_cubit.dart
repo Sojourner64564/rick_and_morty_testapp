@@ -6,6 +6,7 @@ import 'package:rick_and_morty_testapp/features/main_screen_feature/domain/entit
 import 'package:rick_and_morty_testapp/features/main_screen_feature/domain/usecase/fetch_cached_uc.dart';
 import 'package:rick_and_morty_testapp/features/main_screen_feature/domain/usecase/fetch_characters_uc.dart';
 
+
 part 'fetch_characters_state.dart';
 
 @lazySingleton
@@ -16,17 +17,21 @@ class FetchCharactersCubit extends Cubit<FetchCharactersState> {
   final FetchCachedUC fetchCachedUC;
 
   void fetchCharacters() {
+
+
+
     emit(FetchCharactersStateLoading());
     _fetchCharactersUC.fetchCharacters().then((entity){
       emit(FetchCharactersStateLoaded(entity));
 
       fetchCachedUC.saveCharactersToCache(entity).then((value){
         //TODO обратная свзязь что данные сохранились (например в виде маленького значка в углу экрана)
-        print('success');
       }).onError<Failure>((error, stackTrace){
-        print('failure to save');
         //TODO обратная свзязь
       });
+
+
+
     }).onError<Failure>((error, stackTrace){
       if(error is NoInternetFailure){
         fetchCachedUC.fetchCached().then((value){
@@ -59,6 +64,13 @@ class FetchCharactersCubit extends Cubit<FetchCharactersState> {
 
     _fetchCharactersUC.fetchPaginatedCharacters(fetchCharactersStateLoaded.characterEntity.info.next).then((entity){
       emit(FetchCharactersStateLoaded(fetchCharactersStateLoaded.characterEntity.updatedWith(entity)));
+
+      fetchCachedUC.saveCharactersToCache(entity).then((value){
+        //TODO обратная свзязь что данные сохранились (например в виде маленького значка в углу экрана)
+      }).onError<Failure>((error, stackTrace){
+        //TODO обратная свзязь
+      });
+
     }).onError<Failure>((error, stackTrace){
       if(error is NoInternetFailure){
         //TODO сделать обратную связь

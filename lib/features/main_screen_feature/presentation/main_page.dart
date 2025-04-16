@@ -40,90 +40,107 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FetchCharactersCubit, FetchCharactersState>(
-      bloc: widget.fetchCharactersCubit,
-      builder: (context, fetchCharacterState) {
-        if (fetchCharacterState is FetchCharactersStateInitial) {
-          return const Center(
-            child: Text(
-              'Initial',
-              style: AppTextstyles.w700Text20Black,
-            ),
-          );
-        }
-        if (fetchCharacterState is FetchCharactersStateLoading) {
-          return const Center(
-            child: Text(
-              'Loading',
-              style: AppTextstyles.w700Text20Black,
-            ),
-          );
-        }
-        if (fetchCharacterState is FetchCharactersStateLoaded) {
-          return RefreshIndicator(
-            onRefresh: () async{
-              widget.fetchCharactersCubit.fetchCharacters();
-            },
-            child: GridView.builder(
-              itemCount: fetchCharacterState.characterEntity.results.length,
-              controller: scrollController,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.65,
-              ),
-              itemBuilder: (BuildContext context, int index) {
-                final result = fetchCharacterState.characterEntity.results[index];
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: BlocBuilder<FavoriteButtonCubit, FavoriteButtonState>(
-                    bloc: widget.favoriteButtonCubit,
-                    builder: (context, favoriteButtonState) {
-                      return CharacterCardWidget(
-                        onTap: () {
-                          widget.favoriteCardController.saveFavoriteCard(result);
-                        },
-                        resultEntity: fetchCharacterState.characterEntity.results[index],
-                        isFavorite: widget.favoriteButtonCubit.isCharacterFavorite(result.id),
-                      );
-                    },
-                  ),
-                );
-              },
-            ),
-          );
-        }
-        if (fetchCharacterState is FetchCharactersStateCacheEmpty) {
-          return const Center(
-            child: Text(
-              'Cache Empty',
-              style: AppTextstyles.w700Text20Black,
-            ),
-          );
-        }
-        if (fetchCharacterState is FetchCharactersStateCacheError) {
-          return const Center(
-            child: Text(
-              'Cache Error',
-              style: AppTextstyles.w700Text20Black,
-            ),
-          );
-        }
-        if (fetchCharacterState is FetchCharactersStateError) {
-          return const Center(
-            child: Text(
-              'Error',
-              style: AppTextstyles.w700Text20Black,
-            ),
-          );
-        } else {
-          return const Center(
-            child: Text(
-              'Unexpected error',
-              style: AppTextstyles.w700Text20Black,
-            ),
-          );
-        }
+    return RefreshIndicator(
+      onRefresh: () async{
+        widget.fetchCharactersCubit.fetchCharacters();
       },
+      child: LayoutBuilder(// Лейаут билдер чтобы взять констрейнтс пространства между AppBar и BottomNavigationBar
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return SingleChildScrollView(// Скроллящийся виджет для рефреш индикатора
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: SizedBox(
+              height: constraints.maxHeight,
+             child: Center(
+                child: BlocBuilder<FetchCharactersCubit, FetchCharactersState>(
+                  bloc: widget.fetchCharactersCubit,
+                  builder: (context, fetchCharacterState) {
+                    if (fetchCharacterState is FetchCharactersStateInitial) {
+                      return const Center(
+                        child: Text(
+                          'Initial',
+                          style: AppTextstyles.w700Text20Black,
+                        ),
+                      );
+                    }
+                    if (fetchCharacterState is FetchCharactersStateLoading) {
+                      return const Center(
+                        child: Text(
+                          'Loading',
+                          style: AppTextstyles.w700Text20Black,
+                        ),
+                      );
+                    }
+                    if (fetchCharacterState is FetchCharactersStateLoaded) {
+                      return RefreshIndicator(
+                        onRefresh: () async{
+                          widget.fetchCharactersCubit.fetchCharacters();
+                        },
+                        child: GridView.builder(
+                          itemCount: fetchCharacterState.characterEntity.results.length,
+                          controller: scrollController,
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 0.65,
+                          ),
+                          itemBuilder: (BuildContext context, int index) {
+                            final result = fetchCharacterState.characterEntity.results[index];
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: BlocBuilder<FavoriteButtonCubit, FavoriteButtonState>(
+                                bloc: widget.favoriteButtonCubit,
+                                builder: (context, favoriteButtonState) {
+                                  return CharacterCardWidget(
+                                    onTap: () {
+                                      widget.favoriteCardController.saveFavoriteCard(result);
+                                    },
+                                    resultEntity: fetchCharacterState.characterEntity.results[index],
+                                    isFavorite: widget.favoriteButtonCubit.isCharacterFavorite(result.id),
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    }
+                    if (fetchCharacterState is FetchCharactersStateCacheEmpty) {
+                      return const Center(
+                        child: Text(
+                          'Cache Empty',
+                          style: AppTextstyles.w700Text20Black,
+                        ),
+                      );
+                    }
+                    if (fetchCharacterState is FetchCharactersStateCacheError) {
+                      return const Center(
+                        child: Text(
+                          'Cache Error',
+                          style: AppTextstyles.w700Text20Black,
+                        ),
+                      );
+                    }
+                    if (fetchCharacterState is FetchCharactersStateError) {
+                      return const Center(
+                        child: Text(
+                          'Error',
+                          style: AppTextstyles.w700Text20Black,
+                        ),
+                      );
+                    } else {
+                      return const Center(
+                        child: Text(
+                          'Unexpected error',
+                          style: AppTextstyles.w700Text20Black,
+                        ),
+                      );
+                    }
+                  },
+                ),
+              ),
+            ),
+          );
+        }
+      ),
     );
   }
 }
