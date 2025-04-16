@@ -6,9 +6,10 @@ import 'package:rick_and_morty_testapp/features/common_feature/presentation/widg
 import 'package:rick_and_morty_testapp/features/favorites_screen_feature/presentation/controller/sorted_favorites_cubit/sorted_favorites_cubit.dart';
 
 class FavoritePage extends StatelessWidget {
-  FavoritePage({super.key});
+  FavoritePage({super.key, required this.controller});
 
   final sortedFavoritesCubit = getIt<SortedFavoritesCubit>();
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +40,14 @@ class FavoritePage extends StatelessWidget {
               childAspectRatio: 0.65,
             ),
             itemBuilder: (BuildContext context, int index) {
+              final result = state.resultEntityList[index];
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CharacterCardWidget(
                   onTap: () {
-
+                    sortedFavoritesCubit.deleteWithFilter(controller.text, result.id);
                   },
-                  resultEntity: state.resultEntityList[index],
+                  resultEntity: result,
                   isFavorite: true,
                 ),
               );
@@ -75,8 +77,6 @@ class FavoritePage extends StatelessWidget {
             ),
           );
         }
-
-
       },
     );
   }

@@ -1,6 +1,7 @@
 import 'package:drift/drift.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rick_and_morty_testapp/core/database/database.dart';
+import 'package:rick_and_morty_testapp/core/database/favorite_database.dart';
 import 'package:rick_and_morty_testapp/core/error/failure.dart';
 import 'package:rick_and_morty_testapp/features/common_feature/domain/repository/database_repository.dart';
 import 'package:rick_and_morty_testapp/features/main_screen_feature/domain/entity/location_entity.dart';
@@ -10,7 +11,7 @@ import 'package:rick_and_morty_testapp/features/main_screen_feature/domain/entit
 class DatabaseFavoriteRepositoryImpl implements DatabaseFavoriteRepository {
   DatabaseFavoriteRepositoryImpl(this.appDatabase);
 
-  final AppDatabase appDatabase;
+  final FavoriteDatabase appDatabase;
 
   @override
   Future<List<ResultEntity>> loadFromDB() async{
@@ -155,7 +156,7 @@ class DatabaseFavoriteRepositoryImpl implements DatabaseFavoriteRepository {
   }
 
   @override
-  void deleteFromDB(int characterId){
+  Future<void> deleteFromDB(int characterId) async{
     try{
       appDatabase.delete(appDatabase.result)..where((row)=>row.characterId.isValue(characterId))..go();
     }catch(e){

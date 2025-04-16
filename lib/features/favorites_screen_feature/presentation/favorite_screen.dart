@@ -56,7 +56,7 @@ class FavoriteScreen extends StatelessWidget {
           backgroundColor: AppColors.blueColor,
         ),
       ),
-      body: FavoritePage(),
+      body: FavoritePage(controller: controller,),
     );
   }
 }

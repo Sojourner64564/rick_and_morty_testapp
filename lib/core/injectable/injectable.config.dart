@@ -35,7 +35,8 @@ import '../../features/main_screen_feature/presentation/controller/favorite_butt
     as _i246;
 import '../../features/main_screen_feature/presentation/controller/fetch_characters_cubit/fetch_characters_cubit.dart'
     as _i860;
-import '../database/database.dart' as _i660;
+import '../database/cache_database.dart' as _i614;
+import '../database/favorite_database.dart' as _i890;
 import '../network/internet_connection_checker.dart' as _i657;
 import '../network/network_info.dart' as _i932;
 import '../network/network_info_impl.dart' as _i865;
@@ -57,10 +58,11 @@ _i174.GetIt $initGetIt(
       () => registerModuleConnectionChecker.internetConnection);
   gh.factory<_i198.RetrofitRemoteClientInstance>(
       () => _i198.RetrofitRemoteClientInstance());
-  gh.lazySingleton<_i660.AppDatabase>(() => _i660.AppDatabase());
   gh.lazySingleton<_i1007.AppRouter>(() => _i1007.AppRouter());
+  gh.lazySingleton<_i614.CacheDatabase>(() => _i614.CacheDatabase());
+  gh.lazySingleton<_i890.FavoriteDatabase>(() => _i890.FavoriteDatabase());
   gh.lazySingleton<_i1060.DatabaseFavoriteRepository>(
-      () => _i366.DatabaseFavoriteRepositoryImpl(gh<_i660.AppDatabase>()));
+      () => _i366.DatabaseFavoriteRepositoryImpl(gh<_i890.FavoriteDatabase>()));
   gh.lazySingleton<_i340.DatabaseFavoriteUC>(
       () => _i340.DatabaseFavoriteUC(gh<_i1060.DatabaseFavoriteRepository>()));
   gh.lazySingleton<_i932.NetworkInfo>(
@@ -72,8 +74,10 @@ _i174.GetIt $initGetIt(
             gh<_i198.RetrofitRemoteClientInstance>(),
             gh<_i932.NetworkInfo>(),
           ));
-  gh.lazySingleton<_i361.SortedFavoritesCubit>(
-      () => _i361.SortedFavoritesCubit(gh<_i340.DatabaseFavoriteUC>()));
+  gh.lazySingleton<_i361.SortedFavoritesCubit>(() => _i361.SortedFavoritesCubit(
+        gh<_i340.DatabaseFavoriteUC>(),
+        gh<_i246.FavoriteButtonCubit>(),
+      ));
   gh.lazySingleton<_i856.FavoriteCardController>(
       () => _i856.FavoriteCardController(
             gh<_i340.DatabaseFavoriteUC>(),

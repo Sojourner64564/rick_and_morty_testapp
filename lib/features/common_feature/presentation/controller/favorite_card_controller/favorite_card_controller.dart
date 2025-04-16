@@ -13,7 +13,6 @@ class FavoriteCardController {
   final SortedFavoritesCubit _sortedFavoritesCubit;
   final FavoriteButtonCubit _favoriteButtonController;
 
-  //TODO сделать удаление при попытке сохранить карточку которая уже есть
   void saveFavoriteCard(ResultEntity resultEntity) {
      _databaseFavoriteUC.saveToDB(resultEntity).then((value) {
       // Загружает любимых персонажей на странице FavoritePage

@@ -1,6 +1,5 @@
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
-import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 import 'dart:convert';
@@ -56,7 +55,6 @@ MigrationStrategy get migration {
   );
 }
 
-@lazySingleton
 @DriftDatabase(
   tables: [
     Result,
@@ -65,17 +63,15 @@ MigrationStrategy get migration {
 )
 class AppDatabase extends _$AppDatabase {
   //TODO поставить сюда настоящую базу данных как будет закончено
-  AppDatabase() : super(NativeDatabase.memory());
+  AppDatabase(super.e);
 
   @override
   int get schemaVersion => 1;
 
-
-
   LazyDatabase _openConnection() {
     return LazyDatabase(() async {
       final dbFolder = await getApplicationDocumentsDirectory();
-      final file = File(p.join(dbFolder.path, 'rick_and_morty.sqlite'));
+      final file = File(p.join(dbFolder.path, 'favorite_card_rick_and_morty.sqlite'));
       return NativeDatabase(file);
     });
   }

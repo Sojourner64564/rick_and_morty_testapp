@@ -1,9 +1,10 @@
 import 'package:injectable/injectable.dart';
 import 'package:rick_and_morty_testapp/features/common_feature/domain/repository/database_repository.dart';
+import 'package:rick_and_morty_testapp/features/common_feature/domain/usecase/abstract_uc/abstarct_database_favorite_uc.dart';
 import 'package:rick_and_morty_testapp/features/main_screen_feature/domain/entity/result_entity.dart';
 
 @lazySingleton
-class DatabaseFavoriteUC implements DatabaseFavoriteRepository{
+class DatabaseFavoriteUC implements AbstractDatabaseFavoriteUC{
   DatabaseFavoriteUC(this._databaseFavoriteRepository);
 
   final DatabaseFavoriteRepository _databaseFavoriteRepository;
@@ -49,8 +50,14 @@ class DatabaseFavoriteUC implements DatabaseFavoriteRepository{
   }
 
   @override
-  void deleteFromDB(int characterId){
-    return  _databaseFavoriteRepository.deleteFromDB(characterId);
+  Future<void> deleteFromDB(int characterId) async{
+    return await _databaseFavoriteRepository.deleteFromDB(characterId);
+  }
+
+  @override
+  Future<List<ResultEntity>> deleteAndLoadFiltered(String text, int characterId) async{
+    await _databaseFavoriteRepository.deleteFromDB(characterId);
+    return await _databaseFavoriteRepository.loadNameFilteredFromDB(text);
   }
 
 }
