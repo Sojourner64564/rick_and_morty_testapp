@@ -17,9 +17,6 @@ class FetchCharactersCubit extends Cubit<FetchCharactersState> {
   final FetchCachedUC fetchCachedUC;
 
   void fetchCharacters() {
-
-
-
     emit(FetchCharactersStateLoading());
     _fetchCharactersUC.fetchCharacters().then((entity){
       emit(FetchCharactersStateLoaded(entity));
@@ -29,8 +26,6 @@ class FetchCharactersCubit extends Cubit<FetchCharactersState> {
       }).onError<Failure>((error, stackTrace){
         //TODO обратная свзязь
       });
-
-
 
     }).onError<Failure>((error, stackTrace){
       if(error is NoInternetFailure){

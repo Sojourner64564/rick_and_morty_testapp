@@ -38,13 +38,17 @@ class CharacterCardWidget extends StatelessWidget {
                         //TODO сделать в случае ошибки
                         resultEntity.image,
                         fit: BoxFit.cover,
-                        loadingBuilder:
-                            (buildContext, widget, imageChunkEvent) {
+                        loadingBuilder: (buildContext, widget, imageChunkEvent) {
                           if (imageChunkEvent == null) {
                             return widget;
                           }
                           return const Center(
                             child: CircularProgressIndicator(),
+                          );
+                        },
+                        errorBuilder: (buildContext, object, stackTrace){
+                          return Container(
+                            color: AppColors.greyShade65,
                           );
                         },
                       ),
