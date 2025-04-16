@@ -25,10 +25,16 @@ import '../../features/common_feature/presentation/controller/favorite_card_cont
     as _i856;
 import '../../features/favorites_screen_feature/presentation/controller/sorted_favorites_cubit/sorted_favorites_cubit.dart'
     as _i361;
+import '../../features/main_screen_feature/data/repository_impl/fetch_cached_characters_repository_impl.dart'
+    as _i80;
 import '../../features/main_screen_feature/data/repository_impl/fetch_characters_repository_impl.dart'
     as _i733;
+import '../../features/main_screen_feature/domain/repository/fetch_cached_characters_repository.dart'
+    as _i780;
 import '../../features/main_screen_feature/domain/repository/fetch_characters_repository.dart'
     as _i475;
+import '../../features/main_screen_feature/domain/usecase/fetch_cached_uc.dart'
+    as _i496;
 import '../../features/main_screen_feature/domain/usecase/fetch_characters_uc.dart'
     as _i293;
 import '../../features/main_screen_feature/presentation/controller/favorite_button_controller/favorite_button_cubit.dart'
@@ -65,10 +71,14 @@ _i174.GetIt $initGetIt(
       () => _i366.DatabaseFavoriteRepositoryImpl(gh<_i890.FavoriteDatabase>()));
   gh.lazySingleton<_i340.DatabaseFavoriteUC>(
       () => _i340.DatabaseFavoriteUC(gh<_i1060.DatabaseFavoriteRepository>()));
+  gh.lazySingleton<_i780.FetchCachedCharactersRepository>(() =>
+      _i80.FetchCachedCharactersRepositoryImpl(gh<_i614.CacheDatabase>()));
   gh.lazySingleton<_i932.NetworkInfo>(
       () => _i865.NetworkInfoImpl(gh<_i973.InternetConnectionChecker>()));
   gh.lazySingleton<_i246.FavoriteButtonCubit>(
       () => _i246.FavoriteButtonCubit(gh<_i340.DatabaseFavoriteUC>()));
+  gh.lazySingleton<_i496.FetchCachedUC>(
+      () => _i496.FetchCachedUC(gh<_i780.FetchCachedCharactersRepository>()));
   gh.lazySingleton<_i475.FetchCharactersRepository>(
       () => _i733.FetchCharactersRepositoryImpl(
             gh<_i198.RetrofitRemoteClientInstance>(),
@@ -86,8 +96,10 @@ _i174.GetIt $initGetIt(
           ));
   gh.lazySingleton<_i293.FetchCharactersUC>(
       () => _i293.FetchCharactersUC(gh<_i475.FetchCharactersRepository>()));
-  gh.lazySingleton<_i860.FetchCharactersCubit>(
-      () => _i860.FetchCharactersCubit(gh<_i293.FetchCharactersUC>()));
+  gh.lazySingleton<_i860.FetchCharactersCubit>(() => _i860.FetchCharactersCubit(
+        gh<_i293.FetchCharactersUC>(),
+        gh<_i496.FetchCachedUC>(),
+      ));
   return getIt;
 }
 

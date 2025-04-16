@@ -5,6 +5,8 @@ abstract class AbstractDatabaseFavoriteUC{
   Future<void> saveToDB(ResultEntity resultEntity);
   Future<List<ResultEntity>> loadNameFilteredFromDB(String text);
   Future<List<int>> favoriteIds();
+/*
   Future<void> deleteFromDB(int characterId);
+*/
   Future<List<ResultEntity>> deleteAndLoadFiltered(String text, int characterId);
 }

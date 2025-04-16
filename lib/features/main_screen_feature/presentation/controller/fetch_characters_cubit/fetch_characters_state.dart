@@ -9,5 +9,6 @@ class FetchCharactersStateLoaded extends FetchCharactersState {
 
   FetchCharactersStateLoaded(this.characterEntity);
 }
-class FetchCharactersStateNoInternetError extends FetchCharactersState {}
+class FetchCharactersStateCacheError extends FetchCharactersState {}
+class FetchCharactersStateCacheEmpty extends FetchCharactersState {}
 class FetchCharactersStateError extends FetchCharactersState {}

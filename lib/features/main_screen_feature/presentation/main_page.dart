@@ -60,37 +60,50 @@ class _MainPageState extends State<MainPage> {
           );
         }
         if (fetchCharacterState is FetchCharactersStateLoaded) {
-          return GridView.builder(
-            itemCount: fetchCharacterState.characterEntity.results.length,
-            controller: scrollController,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.65,
-            ),
-            itemBuilder: (BuildContext context, int index) {
-              final result = fetchCharacterState.characterEntity.results[index];
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: BlocBuilder<FavoriteButtonCubit, FavoriteButtonState>(
-                  bloc: widget.favoriteButtonCubit,
-                  builder: (context, favoriteButtonState) {
-                    return CharacterCardWidget(
-                      onTap: () {
-                        widget.favoriteCardController.saveFavoriteCard(result);
-                      },
-                      resultEntity: fetchCharacterState.characterEntity.results[index],
-                      isFavorite: widget.favoriteButtonCubit.isCharacterFavorite(result.id),
-                    );
-                  },
-                ),
-              );
+          return RefreshIndicator(
+            onRefresh: () async{
+              widget.fetchCharactersCubit.fetchCharacters();
             },
+            child: GridView.builder(
+              itemCount: fetchCharacterState.characterEntity.results.length,
+              controller: scrollController,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.65,
+              ),
+              itemBuilder: (BuildContext context, int index) {
+                final result = fetchCharacterState.characterEntity.results[index];
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: BlocBuilder<FavoriteButtonCubit, FavoriteButtonState>(
+                    bloc: widget.favoriteButtonCubit,
+                    builder: (context, favoriteButtonState) {
+                      return CharacterCardWidget(
+                        onTap: () {
+                          widget.favoriteCardController.saveFavoriteCard(result);
+                        },
+                        resultEntity: fetchCharacterState.characterEntity.results[index],
+                        isFavorite: widget.favoriteButtonCubit.isCharacterFavorite(result.id),
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
           );
         }
-        if (fetchCharacterState is FetchCharactersStateNoInternetError) {
+        if (fetchCharacterState is FetchCharactersStateCacheEmpty) {
           return const Center(
             child: Text(
-              'No Internet',
+              'Cache Empty',
+              style: AppTextstyles.w700Text20Black,
+            ),
+          );
+        }
+        if (fetchCharacterState is FetchCharactersStateCacheError) {
+          return const Center(
+            child: Text(
+              'Cache Error',
               style: AppTextstyles.w700Text20Black,
             ),
           );

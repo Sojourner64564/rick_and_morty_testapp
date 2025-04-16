@@ -49,10 +49,10 @@ class DatabaseFavoriteUC implements AbstractDatabaseFavoriteUC{
     return await _databaseFavoriteRepository.favoriteIds();
   }
 
-  @override
+/*  @override
   Future<void> deleteFromDB(int characterId) async{
     return await _databaseFavoriteRepository.deleteFromDB(characterId);
-  }
+  }*/
 
   @override
   Future<List<ResultEntity>> deleteAndLoadFiltered(String text, int characterId) async{
